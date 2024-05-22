@@ -69,4 +69,16 @@ public class Project {
     public void setDateFin(Date dateFin) {
         this.dateFin = dateFin;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", projectName='" + projectName + '\'' +
+                ", description='" + description + '\'' +
+                ", budget=" + budget +
+                ", dateDebut=" + dateDebut +
+                ", dateFin=" + dateFin +
+                '}';
+    }
 }

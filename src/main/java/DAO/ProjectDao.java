@@ -10,7 +10,7 @@ public interface ProjectDao {
     void updateProject(Project project) throws SQLException;
     void deleteProject(Project project) throws SQLException;
     Project getProject(int id) throws SQLException;
-    List<Project> getProjects();
+    List<Project> getProjects() throws SQLException;
 
 
 }

@@ -10,14 +10,17 @@ public class Task {
     private Date dateDebutTache;
     private Date dateFinTache;
     private String statut;
-    private List<Ressources> ressourcesNecessaires;
+    private int ProjectId ;
 
-    public Task(int idTask, String title, String description, Date dateDebutTache, Date dateFinTache) {
+
+    public Task(int idTask, String title, String description, Date dateDebutTache, Date dateFinTache, String statut, int projectId) {
         this.idTask = idTask;
         this.title = title;
         this.description = description;
         this.dateDebutTache = dateDebutTache;
         this.dateFinTache = dateFinTache;
+        this.statut = statut;
+        ProjectId = projectId;
     }
 
     public Task() {
@@ -71,11 +74,15 @@ public class Task {
         this.statut = statut;
     }
 
-    public List<Ressources> getRessourcesNecessaires() {
-        return ressourcesNecessaires;
+    public int getProjectId() {
+        return ProjectId;
     }
 
-    public void setRessourcesNecessaires(List<Ressources> ressourcesNecessaires) {
-        this.ressourcesNecessaires = ressourcesNecessaires;
+    public void setProjectId(int projectId) {
+        ProjectId = projectId;
     }
+
+
+
+
 }

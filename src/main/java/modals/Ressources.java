@@ -6,6 +6,7 @@ public class Ressources {
     private String ressourceDescription;
     private int quantity;
     private String supplier;
+    private int idTask;
 
     public Ressources(int ressourceId, String ressourceName, String ressourceDescription, int quantity, String supplier) {
         this.ressourceId = ressourceId;
@@ -13,6 +14,15 @@ public class Ressources {
         this.ressourceDescription = ressourceDescription;
         this.quantity = quantity;
         this.supplier = supplier;
+    }
+
+    public Ressources(int ressourceId, String ressourceName, String ressourceDescription, int quantity, String supplier, int idTask) {
+        this.ressourceId = ressourceId;
+        this.ressourceName = ressourceName;
+        this.ressourceDescription = ressourceDescription;
+        this.quantity = quantity;
+        this.supplier = supplier;
+        this.idTask = idTask;
     }
 
     public Ressources() {
@@ -56,5 +66,13 @@ public class Ressources {
 
     public void setSupplier(String supplier) {
         this.supplier = supplier;
+    }
+
+    public int getIdTask() {
+        return idTask;
+    }
+
+    public void setIdTask(int idTask) {
+        this.idTask = idTask;
     }
 }

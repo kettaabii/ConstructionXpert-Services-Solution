@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectDaoImpl implements ProjectDao {
@@ -85,7 +86,26 @@ public class ProjectDaoImpl implements ProjectDao {
     }
 
     @Override
-    public List<Project> getProjects() {
-        return List.of();
+    public List<Project> getProjects() throws SQLException {
+        String sql = "SELECT * FROM project";
+        List<Project> projects = new ArrayList<Project>();
+        Connection con = Connectiondb.getConnection();
+        PreparedStatement statement = con.prepareStatement(sql);
+        ResultSet resultSet=statement.executeQuery(sql);
+        while(resultSet.next()){
+            Project project = new Project();
+
+            project.setProjectName(resultSet.getString("projectName"));
+            project.setDescription(resultSet.getString("description"));
+            project.setBudget(resultSet.getDouble("Budget"));
+            project.setDateDebut(resultSet.getDate("dateDebut"));
+            project.setDateFin(resultSet.getDate("dateFin"));
+            projects.add(project);
+        }
+
+        return projects;
+
+
+
     }
 }
