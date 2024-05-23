@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="modals.Project" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -514,7 +519,7 @@
     }
     main .projects{
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(8, 2fr);
         gap: 1.6rem;
     }
 
@@ -536,8 +541,7 @@
         color: var(--color-white);
         font-size: 1.5rem;
     }
-    main .projects > div.mth span,main .subjects > div.cg span{background: var(--color-danger);}
-    main .projects > div.cs span{background: var(--color-success);}
+
 
     main .projects h3{
         margin: 1rem 0 0.6rem;
@@ -563,22 +567,8 @@
         stroke-dashoffset: 25;
         stroke-dasharray: 210;
     }
-    main .projects .mth svg circle{
-        stroke-dashoffset: 7;
-        stroke-dasharray: 210;
-    }
-    main .projects .cs svg circle{
-        stroke-dashoffset: 35;
-        stroke-dasharray: 210;
-    }
-    main .projects .cg svg circle{
-        stroke-dashoffset: 0;
-        stroke-dasharray: 210;
-    }
-    main .projects .net svg circle{
-        stroke-dashoffset: 5;
-        stroke-dasharray: 210;
-    }
+
+
     main .projects .progress .number{
         position: absolute;
         top: 0;left: 0;
@@ -806,10 +796,11 @@
     <main>
         <h1>Projects :</h1>
         <div class="projects">
+            <c:forEach var="project" items="${projects}">
             <div class="eg">
 
-                <h3> Projet 1</h3>
-                <p>IDproject</p>
+                <h3> ${project.getProjectName()}</h3>
+                <p>${project.getId()}</p>
                 <h2>tasks done 12/14</h2>
                 <div class="progress">
                     <svg><circle cx="38" cy="38" r="36"></circle></svg>
@@ -817,48 +808,9 @@
                 </div>
                 <small class="text-muted">Last 24 Hours</small>
             </div>
-            <div class="mth">
+            </c:forEach>
 
-                <h3>Projet 2</h3>
-                <p>idProjet</p>
-                <h2>27/29</h2>
-                <div class="progress">
-                    <svg><circle cx="38" cy="38" r="36"></circle></svg>
-                    <div class="number"><p>93%</p></div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-            <div class="cs">
-                <h3>project3</h3>
-                <h2>27/30</h2>
-                <div class="progress">
-                    <svg><circle cx="38" cy="38" r="36"></circle></svg>
-                    <div class="number"><p>81%</p></div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-            <div class="cg">
-
-                <h3>Project</h3>
-                <h2>24/25</h2>
-                <div class="progress">
-                    <svg><circle cx="38" cy="38" r="36"></circle></svg>
-                    <div class="number"><p>96%</p></div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-            <div class="net">
-
-                <h3>project</h3>
-                <h2>25/27</h2>
-                <div class="progress">
-                    <svg><circle cx="38" cy="38" r="36"></circle></svg>
-                    <div class="number"><p>92%</p></div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
         </div>
-
         <div class="TaskTable" id="TaskTable">
             <div>
                 <span id="prevDay">&lt;</span>
@@ -882,7 +834,7 @@
 
 
 
-<script src="taskTable.js"></script>
-<script src="app.js"></script>
+    <script src="taskTable.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

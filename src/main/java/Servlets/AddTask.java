@@ -2,6 +2,7 @@ package Servlets;
 import DAO.TaskDao;
 import implementation.TaskDaoImpl;
 import modals.Task;
+import modals.Task.Status;
 
 import java.io.*;
 import java.sql.Date;
@@ -27,6 +28,7 @@ public class AddTask extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
+
         response.setContentType("text/html");
         request.getRequestDispatcher("WEB-INF/views/addTask.jsp").forward(request,response);
 
@@ -38,7 +40,7 @@ public class AddTask extends HttpServlet {
         String description = request.getParameter("description");
         Date dateDebutTache = Date.valueOf(request.getParameter("dateStart"));
         Date dateFinTache = Date.valueOf(request.getParameter("dateFin"));
-        String status = request.getParameter("status");
+        Status status = Status.valueOf(request.getParameter("status"));
         Integer projectId = Integer.parseInt(request.getParameter("projectId"));
 
         Task task = new Task(0,title,description,dateDebutTache,dateFinTache,status,projectId);

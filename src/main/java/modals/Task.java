@@ -9,22 +9,33 @@ public class Task {
     private String description;
     private Date dateDebutTache;
     private Date dateFinTache;
-    private String statut;
     private int ProjectId ;
+    private Status status;
+    private int assignedEmployeeId;
+    private List<Integer> requiredResourceIds;
 
 
-    public Task(int idTask, String title, String description, Date dateDebutTache, Date dateFinTache, String statut, int projectId) {
+    public Task(int idTask, String title, String description, Date dateDebutTache, Date dateFinTache, Status status, int projectId, int assignedEmployee, List<Integer> requiredResourceIds) {
         this.idTask = idTask;
         this.title = title;
         this.description = description;
         this.dateDebutTache = dateDebutTache;
         this.dateFinTache = dateFinTache;
-        this.statut = statut;
-        ProjectId = projectId;
+        this.status = status;
+        this.ProjectId = projectId;
+        this.assignedEmployeeId = assignedEmployee;
+        this.requiredResourceIds = requiredResourceIds;
+    }
+    public Task(int idTask, String title, String description, Date dateDebutTache, Date dateFinTache, Status status, int idProjet) {
+        this.idTask = idTask;
+        this.title = title;
+        this.description = description;
+        this.dateDebutTache = dateDebutTache;
+        this.dateFinTache = dateFinTache;
+        this.status = status;
+        this.ProjectId = idProjet;
     }
 
-    public Task() {
-    }
 
     public int getIdTask() {
         return idTask;
@@ -66,12 +77,28 @@ public class Task {
         this.dateFinTache = dateFinTache;
     }
 
-    public String getStatut() {
-        return statut;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setStatut(String statut) {
-        this.statut = statut;
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public int getAssignedEmployeeId() {
+        return assignedEmployeeId;
+    }
+
+    public void setAssignedEmployeeId(int assignedEmployeeId) {
+        this.assignedEmployeeId = assignedEmployeeId;
+    }
+
+    public List<Integer> getRequiredResourceIds() {
+        return requiredResourceIds;
+    }
+
+    public void setRequiredResourceIds(List<Integer> requiredResourceIds) {
+        this.requiredResourceIds = requiredResourceIds;
     }
 
     public int getProjectId() {
@@ -82,7 +109,11 @@ public class Task {
         ProjectId = projectId;
     }
 
-
+    public enum Status {
+        A_FAIRE,
+        EN_COURS,
+        FAITE
+    }
 
 
 }

@@ -18,7 +18,7 @@
             <h5 class="card-title">${task.title}</h5>
             <p class="card-text">Date de début: ${task.dateDebutTache}</p>
             <p class="card-text">Date de fin: ${task.dateFinTache}</p>
-            <p class="card-text">Statut: ${task.statut}</p>
+            <p class="card-text">Statut: ${task.status}</p>
         </div>
         </c:forEach>
     </div>

@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Add project </title>
+    <title>Add Task</title>
 </head>
 <body>
 <form action="addTask" method="post">
-    <label>Project Name :</label><br>
+    <label>PTask Name :</label><br>
     <input type="text" name="taskName"><br><br>
 
     <label>Description:</label><br>

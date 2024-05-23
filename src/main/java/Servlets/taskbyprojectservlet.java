@@ -20,7 +20,7 @@ public class taskbyprojectservlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         TaskDao tacheDAO = new TaskDaoImpl();
 //        int idProjet = Integer.parseInt(request.getParameter("idProjet"));
-        int idProjet = 3;
+        int idProjet = 1;
         List<Task> taches = null;
         try {
             taches = tacheDAO.getTaskByProject(idProjet);
