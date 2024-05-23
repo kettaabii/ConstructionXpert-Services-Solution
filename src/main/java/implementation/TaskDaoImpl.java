@@ -2,7 +2,7 @@ package implementation;
 
 import DAO.TaskDao;
 import modals.Task;
-import modals.Ressources;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +83,53 @@ public class TaskDaoImpl implements TaskDao {
             }
         }
         return null;
+    }
+    @Override
+    public Integer getNumberOfTasksByStatus(String status, int id) throws SQLException{
+        String sql = "SELECT count(idTask) FROM task WHERE statut=? AND idProject=? ";
+        Connection con = Connectiondb.getConnection();
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, status);
+            statement.setInt(2, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        }
+        return 0;
+    }
+    @Override
+    public Integer getNumberOfTotalTasks(int id) throws SQLException{
+        String sql = "SELECT count(idTask) FROM task WHERE  idProject=? ";
+        Connection con = Connectiondb.getConnection();
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public Integer getNumberOfOveralltasksByStatus() throws SQLException {
+        return 0;
+    }
+
+    @Override
+    public Integer getNumberOfTotalTasksoOverall() throws SQLException{
+        String sql = "SELECT count(idTask) FROM task  ";
+        Connection con = Connectiondb.getConnection();
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        }
+        return 0;
     }
 
     @Override

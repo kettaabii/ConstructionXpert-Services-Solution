@@ -582,64 +582,25 @@
         margin-top: 1rem;
         display: block;
     }
-    main .TaskTable{
-        margin-top: 2rem;
+    main .Overview{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+        gap: 1rem;
+
     }
-    main .TaskTable h2{
+    main .Overview h2{
         margin-bottom: .8rem;
     }
-    main .TaskTable table{
+    main .Overview .card{
+
         background-color: var(--color-white);
-        width: 100%;
+        width: 23.6%;
         border-radius: var(--card-border-radius);
         padding: var(--card-padding);
         text-align: center;
         box-shadow: var(--box-shadow);
         transition: all 300ms ease;
-    }
-    main .TaskTable span{display: none;}
-    main .TaskTable table:hover{box-shadow: none;}
-    main table tbody td{
-        height: 2.8rem;
-        border-bottom: 1px solid var(--color-light);
-        color: var(--color-dark-varient);
-    }
-    main table tbody tr:last-child td{border: none;}
-
-    main .TaskTable.active{
-        width: 100%;
-        height: 100vh;
-        position: fixed;
-        top: 0;left: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    main .TaskTable.active h2{
-        color: var(--color-dark);
-    }
-    main .TaskTable.active table{
-        width: 90%;
-        max-width: 1000px;
-        position: relative;
-    }
-    main .TaskTable.active span{
-        display: block;
-        font-size: 2rem;
-        color: var(--color-dark);
-        cursor: pointer;
-    }
-    .TaskTable div{
-        position: relative;
-        width: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    main .TaskTable.active .closeBtn{
-        position: absolute;
-        top: 5%;right: 5%;
     }
 
     /* MEDIA QUERIES  */
@@ -656,7 +617,7 @@
 
         main .projects{
             grid-template-columns: repeat(2, 1fr);
-            gap: 1;
+            gap: 1rem;
         }
         main .timetable{
             width: 150%;
@@ -796,45 +757,87 @@
     <main>
         <h1>Projects :</h1>
         <div class="projects">
-            <c:forEach var="project" items="${projects}">
-            <div class="eg">
+            <c:forEach var="projectData" items="${projectsData}">
+                <div class="eg"  data-done-tasks="${projectData.doneTasks}"
+                     data-total-tasks="${projectData.totalTasks}">
 
-                <h3> ${project.getProjectName()}</h3>
-                <p>${project.getId()}</p>
-                <h2>tasks done 12/14</h2>
-                <div class="progress">
-                    <svg><circle cx="38" cy="38" r="36"></circle></svg>
-                    <div class="number"><p>86%</p></div>
+                    <h3>${projectData.project.projectName}</h3>
+                    <p>${projectData.project.budget}</p>
+                    <h2 class>${projectData.doneTasks}/${projectData.totalTasks}
+                    </h2>
+                    <div class="progress">
+                        <svg>
+                            <circle class="progressCircle" cx="38" cy="38" r="36"></circle>
+                        </svg>
+                        <div class="number">
+                            <p class="percentage"><!-- Percentage will be displayed here --></p>
+                        </div>
+                    </div>
+                    <small class="text-muted">Last 24 Hours</small>
                 </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
             </c:forEach>
-
         </div>
-        <div class="TaskTable" id="TaskTable">
-            <div>
-                <span id="prevDay">&lt;</span>
-                <h2>Today's Timetable</h2>
-                <span id="nextDay">&gt;</span>
+
+
+        <h1 style="margin-top: 1rem;">Overview</h1>
+        <div class="Overview">
+
+            <div class="card">
+                <div class="headcard" style="display: flex; justify-content: space-between;">
+                    <h2>Tasks</h2>
+                    <span class="material-icons-sharp">more_horiz</span>
+                </div>
+                <div class="bodycard" style="display:flex;">
+
+                    <h1>${overallTasks}</h1>
+                    <h5>Tasks</h5>
+                </div>
+
             </div>
-            <span class="closeBtn" onclick="timeTableAll()">X</span>
-            <table>
-                <thead>
-                <tr>
-                    <th>Time</th>
-                    <th>Task</th>
-                    <th>Project</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+            <div class="card">
+                <h1>123</h1>
+                <h5>Tasks</h5>
+            </div>
+            <div class="card">
+                <h1>123</h1>
+                <h5>Tasks</h5>
+            </div>
+            <div class="card">
+                <h1>123</h1>
+                <h5>Tasks</h5>
+            </div>
+
+
         </div>
     </main>
 
+</div>
 
+<script>
+    var egElements = document.querySelectorAll(".eg");
 
-    <script src="taskTable.js"></script>
-    <script src="app.js"></script>
+    egElements.forEach(function(egElement) {
+        var doneTasks = parseInt(egElement.getAttribute("data-done-tasks"));
+        var totalTasks = parseInt(egElement.getAttribute("data-total-tasks"));
+        var progress = (doneTasks / totalTasks) * 100;
+
+        var progressCircle = egElement.querySelector(".progressCircle");
+        console.log("progressCircle:", progressCircle);
+
+        if (progressCircle) {
+            var circumference = 2 * Math.PI * parseFloat(progressCircle.getAttribute("r"));
+
+            progressCircle.style.strokeDasharray = `${circumference * (progress / 100)} ${circumference}`;
+            console.log("strokeDasharray:", progressCircle.style.strokeDasharray);
+        } else {
+            console.error("Progress circle not found.");
+        }
+
+        var percentageElement = egElement.querySelector(".percentage");
+        console.log("percentageElement:", percentageElement);
+        percentageElement.textContent = progress.toFixed(2) + "%";
+    });
+</script>
+
 </body>
 </html>
