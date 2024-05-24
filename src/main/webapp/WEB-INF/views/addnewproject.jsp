@@ -92,7 +92,7 @@
         width: 93%;
         margin: 0 3rem;
         gap: 1.8rem;
-        grid-template-columns: 14rem auto 23rem;
+        grid-template-columns: 14rem auto ;
         padding-top: 4rem;
     }
     header h3{font-weight: 500;}
@@ -518,7 +518,15 @@
         grid-template-columns: repeat(5, 1fr);
         gap: 1.6rem;
     }
+    main .main-container{
+        background-color: var(--color-white);
+        padding: var(--card-padding);
+        border-radius: var(--card-border-radius);
+        margin-top: 1rem;
+        box-shadow: var(--box-shadow);
+        transition: all 300ms ease;
 
+    }
     main .projects > div{
         background-color: var(--color-white);
         padding: var(--card-padding);
@@ -623,7 +631,7 @@
     @media screen and (max-width: 1200px) {
         html{font-size: 12px;}
         .container{
-            grid-template-columns: 13rem auto 13rem;
+            grid-template-columns: 13rem auto ;
         }
         header{position: fixed;}
         .container{padding-top: 4rem;}
@@ -765,93 +773,87 @@
 
     <main>
         <h1>Projects :</h1>
-        <div class="projects">
-            <div class="eg">
+        <div class="main-container">
+            <div class="leftform" >
+                <div class="FormLeft">
+                    <h1> Project informations :</h1>
+                    <form action="addPojectTask" method="post" >
+                        <div class="projectForm" style="display: flex;gap:3rem;">
+                            <div class="left_info_form">
+                                <label for="projectName">Project Name:</label><br>
+                                <input type="text" id="projectName" name="projectName" required><br>
 
-                <h3> Projet 1</h3>
-                <p>IDproject</p>
-                <h2>tasks done 12/14</h2>
-                <div class="progress">
-                    <svg><circle cx="38" cy="38" r="36"></circle></svg>
-                    <div class="number"><p>86%</p></div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-            <div class="mth">
+                                <label for="startDate">Start Date:</label><br>
+                                <input type="date" id="startDate" name="startDate" required><br>
 
-                <h3>Projet 2</h3>
-                <p>idProjet</p>
-                <h2>27/29</h2>
-                <div class="progress">
-                    <svg><circle cx="38" cy="38" r="36"></circle></svg>
-                    <div class="number"><p>93%</p></div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-            <div class="cs">
-                <h3>project3</h3>
-                <h2>27/30</h2>
-                <div class="progress">
-                    <svg><circle cx="38" cy="38" r="36"></circle></svg>
-                    <div class="number"><p>81%</p></div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-            <div class="cg">
+                                <label for="endDate">End Date:</label><br>
+                                <input type="date" id="endDate" name="endDate" required><br>
+                            </div>
+                            <div class="right_info_form">
 
-                <h3>Project</h3>
-                <h2>24/25</h2>
-                <div class="progress">
-                    <svg><circle cx="38" cy="38" r="36"></circle></svg>
-                    <div class="number"><p>96%</p></div>
-                </div>
-                <small class="text-muted">Last 24 Hours</small>
-            </div>
-            <div class="net">
+                                <label for="description">Description:</label><br>
+                                <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
 
-                <h3>project</h3>
-                <h2>25/27</h2>
-                <div class="progress">
-                    <svg><circle cx="38" cy="38" r="36"></circle></svg>
-                    <div class="number"><p>92%</p></div>
+
+
+
+
+                                <label for="budget">Budget:</label><br>
+                                <input type="number" id="budget" name="budget" required><br><br>
+                            </div></div>
+                        <h1>task infos</h1>
+                        <div id="taskContainer">
+
+                        <div class="TaskForm" style="display: flex;gap:3rem;">
+
+                            <div class="left_info_form">
+                                <label for="TaskTitle">Task Title:</label><br>
+                                <input type="text" id="TaskTitle" name="TaskTitle[]" required><br>
+
+                                <label for="TaskstartDate">Start Date:</label><br>
+                                <input type="date" id="TaskstartDate" name="TaskstartDate" required><br>
+
+                                <label for="TaskendDate">End Date:</label><br>
+                                <input type="date" id="TaskendDate" name="TaskendDate" required><br>
+                            </div>
+                            <div class="right_info_form">
+
+                                <label for="Taskdescription">Description:</label><br>
+                                <textarea id="Taskdescription" name="Taskdescription" rows="4" cols="50" required></textarea><br>
+                                <button type="button" id="addTaskButton">Add Task</button>
+                            </div>
+                        </div>
+
+
+                        </div>
+                        <input type="submit" value="Submit">
+                    </form>
                 </div>
-                <small class="text-muted">Last 24 Hours</small>
+
             </div>
         </div>
-        <h1 style="margin-top: 1rem;">Overview</h1>
-        <div class="Overview">
 
-            <div class="card">
-                <div class="headcard" style="display: flex; justify-content: space-between;">
-                <h2>Tasks</h2>
-                <span class="material-icons-sharp">more_horiz</span>
-                </div>
-                <div class="bodycard" style="display:flex;">
-
-                    <h1>123</h1>
-                        <h5>Tasks</h5>
-                </div>
-
-            </div>
-            <div class="card">
-                <h1>123</h1>
-                <h5>Tasks</h5>
-            </div>
-            <div class="card">
-                <h1>123</h1>
-                <h5>Tasks</h5>
-            </div>
-            <div class="card">
-                <h1>123</h1>
-                <h5>Tasks</h5>
-            </div>
-
-
-        </div>
     </main>
 
 
 </div>
-
+<script>
+    // JavaScript to dynamically add task input fields
+    document.getElementById("addTaskButton").addEventListener("click", function() {
+        var taskContainer = document.getElementById("taskContainer");
+        var newTask = document.createElement("div");
+        newTask.classList.add("task");
+        newTask.innerHTML = `
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Task Title</h5>
+                    <input type="text" name="taskTitle[]" class="form-control" required>
+                    <!-- Add more task fields as needed -->
+                </div>
+            </div>
+        `;
+        taskContainer.appendChild(newTask);
+    });
+</script>
 </body>
 </html>

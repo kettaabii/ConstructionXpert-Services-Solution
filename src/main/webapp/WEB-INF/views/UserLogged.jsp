@@ -26,7 +26,7 @@
         --color-dark-varient: #677483;
         --color-background: #f6f6f9;
 
-        --card-border-radius: 2rem;
+        --card-border-radius: 1rem;
         --border-radius-1: 0.4rem;
         --border-radius-2: 1.2rem;
 
@@ -96,7 +96,7 @@
         width: 93%;
         margin: 0 3rem;
         gap: 1.8rem;
-        grid-template-columns: 14rem auto 23rem;
+        grid-template-columns: 14rem auto;
         padding-top: 4rem;
     }
     header h3{font-weight: 500;}
@@ -519,7 +519,7 @@
     }
     main .projects{
         display: grid;
-        grid-template-columns: repeat(8, 2fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 1.6rem;
     }
 
@@ -541,7 +541,8 @@
         color: var(--color-white);
         font-size: 1.5rem;
     }
-
+    main .projects > div.mth span,main .subjects > div.cg span{background: var(--color-danger);}
+    main .projects > div.cs span{background: var(--color-success);}
 
     main .projects h3{
         margin: 1rem 0 0.6rem;
@@ -567,8 +568,22 @@
         stroke-dashoffset: 25;
         stroke-dasharray: 210;
     }
-
-
+    main .projects .mth svg circle{
+        stroke-dashoffset: 7;
+        stroke-dasharray: 210;
+    }
+    main .projects .cs svg circle{
+        stroke-dashoffset: 35;
+        stroke-dasharray: 210;
+    }
+    main .projects .cg svg circle{
+        stroke-dashoffset: 0;
+        stroke-dasharray: 210;
+    }
+    main .projects .net svg circle{
+        stroke-dashoffset: 5;
+        stroke-dasharray: 210;
+    }
     main .projects .progress .number{
         position: absolute;
         top: 0;left: 0;
@@ -603,11 +618,16 @@
         transition: all 300ms ease;
     }
 
+
+
+
+
+
     /* MEDIA QUERIES  */
     @media screen and (max-width: 1200px) {
         html{font-size: 12px;}
         .container{
-            grid-template-columns: 13rem auto 20rem;
+            grid-template-columns: 13rem auto 13rem;
         }
         header{position: fixed;}
         .container{padding-top: 4rem;}
@@ -617,7 +637,7 @@
 
         main .projects{
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
+            gap: 1;
         }
         main .timetable{
             width: 150%;
@@ -656,14 +676,7 @@
             margin: 3rem 0 0 0;
             width: 100%;
         }
-        main .timetable table{
-            width: 100%;
-            margin: 0;
-        }
-        .right{
-            width: 100%;
-            padding: 2rem;
-        }
+
     }
     </style>
 </head>
@@ -795,7 +808,11 @@
 
             </div>
             <div class="card">
-                <h1>123</h1>
+                <div class="headcard" style="display: flex; justify-content: space-between;">
+                    <h2>Project</h2>
+                    <span class="material-icons-sharp">more_horiz</span>
+                </div>
+                <h1>${overallProjects}</h1>
                 <h5>Tasks</h5>
             </div>
             <div class="card">
@@ -809,6 +826,7 @@
 
 
         </div>
+
     </main>
 
 </div>

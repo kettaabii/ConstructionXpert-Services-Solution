@@ -166,5 +166,15 @@ public class TaskDaoImpl implements TaskDao {
             con.close(); // Fermer la connexion à la base de données
         }
     }
+    @Override
+    public void associateTaskWithProject(int taskId, int projectId) throws SQLException {
+        String sql = "UPDATE task SET idProject = ? WHERE idTask = ?";
+        try (Connection con = Connectiondb.getConnection();
+             PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setInt(1, projectId);
+            statement.setInt(2, taskId);
+            statement.executeUpdate();
+        }
+    }
 }
 

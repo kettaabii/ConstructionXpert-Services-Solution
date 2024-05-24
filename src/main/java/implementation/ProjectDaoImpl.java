@@ -200,6 +200,18 @@ public List<ProjectData> getAllProjectsData() throws SQLException {
 
     return projectDataList;
 }
+    @Override
+    public Integer getNumberOfTotalProjectOverall() throws SQLException{
+        String sql = "SELECT count(id) FROM project  ";
+        Connection con = Connectiondb.getConnection();
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
 
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        }
+        return 0;
+    }
 
 }

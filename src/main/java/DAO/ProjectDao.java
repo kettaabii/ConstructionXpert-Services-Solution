@@ -63,4 +63,6 @@ public interface ProjectDao {
     //        }
     //    }
     List<ProjectData> getAllProjectsData() throws SQLException;
+
+    Integer getNumberOfTotalProjectOverall() throws SQLException;
 }

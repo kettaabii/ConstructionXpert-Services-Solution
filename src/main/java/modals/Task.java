@@ -36,6 +36,8 @@ public class Task {
         this.ProjectId = idProjet;
     }
 
+    public Task() {
+    }
 
     public int getIdTask() {
         return idTask;

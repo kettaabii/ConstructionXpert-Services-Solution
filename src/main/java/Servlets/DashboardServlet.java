@@ -30,10 +30,10 @@ public class DashboardServlet extends HttpServlet {
         try {
             List<ProjectData> projectsData = projectDao.getAllProjectsData();
             request.setAttribute("projectsData", projectsData);
-            System.out.println("ddddddd" + projectsData);
             int overallTasks=taskDao.getNumberOfTotalTasksoOverall();
             request.setAttribute("overallTasks", overallTasks);
-            System.out.println("ttttaaaasssskkkksss"+overallTasks);
+            int overallProjects=projectDao.getNumberOfTotalProjectOverall();
+            request.setAttribute("overallProjects", overallProjects);
             for (ProjectData projectData : projectsData) {
                 int projectId = projectData.getProject().getId();
                 int doneTasks = taskDao.getNumberOfTasksByStatus("FAITE", projectId);
