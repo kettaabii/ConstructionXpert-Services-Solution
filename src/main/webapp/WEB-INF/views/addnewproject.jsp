@@ -777,7 +777,7 @@
             <div class="leftform" >
                 <div class="FormLeft">
                     <h1> Project informations :</h1>
-                    <form action="addPojectTask" method="post" >
+                    <form action="addPojectTask" method="post" onsubmit="sendData(event)" >
                         <div class="projectForm" style="display: flex;gap:3rem;">
                             <div class="left_info_form">
                                 <label for="projectName">Project Name:</label><br>
@@ -801,14 +801,12 @@
                                 <label for="budget">Budget:</label><br>
                                 <input type="number" id="budget" name="budget" required><br><br>
                             </div></div>
-                        <h1>task infos</h1>
-                        <div id="taskContainer">
-
+                        <!--<h1>task infos</h1>
                         <div class="TaskForm" style="display: flex;gap:3rem;">
 
                             <div class="left_info_form">
                                 <label for="TaskTitle">Task Title:</label><br>
-                                <input type="text" id="TaskTitle" name="TaskTitle[]" required><br>
+                                <input type="text" id="TaskTitle" name="TaskTitle" required><br>
 
                                 <label for="TaskstartDate">Start Date:</label><br>
                                 <input type="date" id="TaskstartDate" name="TaskstartDate" required><br>
@@ -820,15 +818,36 @@
 
                                 <label for="Taskdescription">Description:</label><br>
                                 <textarea id="Taskdescription" name="Taskdescription" rows="4" cols="50" required></textarea><br>
-                                <button type="button" id="addTaskButton">Add Task</button>
+                                <button type="button" >Add Task</button>
+                            </div>
+                        </div>
+                        <input type="submit" value="Submit">
+                    </form>-->
+                        <div id="tasksContainer">
+                            <h2>Tasks</h2>
+                            <div id="task-card" class="task-card">
+                                <label for="taskTitle">Task Title:</label><br>
+                                <input type="text" id="taskTitle" name="taskTitle" required><br>
+
+                                <label for="taskStartDate">Start Date:</label><br>
+                                <input type="date" id="taskStartDate" name="taskStartDate" required><br>
+
+                                <label for="taskEndDate">End Date:</label><br>
+                                <input type="date" id="taskEndDate" name="taskEndDate" required><br>
+
+                                <label for="taskDescription">Description:</label><br>
+                                <textarea id="taskDescription" name="taskDescription" rows="4" cols="50" required></textarea><br>
                             </div>
                         </div>
 
+                        <!-- Add Task Button -->
+                        <button type="button" id="addTaskButton">Add Task</button><br><br>
 
-                        </div>
+                        <!-- Submit Button -->
                         <input type="submit" value="Submit">
                     </form>
                 </div>
+
 
             </div>
         </div>
@@ -838,22 +857,57 @@
 
 </div>
 <script>
-    // JavaScript to dynamically add task input fields
+    var taskTitles = [];
+    var taskDescriptions = [];
+    var taskStartDates = [];
+    var taskEndDates = [];
+
     document.getElementById("addTaskButton").addEventListener("click", function() {
-        var taskContainer = document.getElementById("taskContainer");
-        var newTask = document.createElement("div");
-        newTask.classList.add("task");
-        newTask.innerHTML = `
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Task Title</h5>
-                    <input type="text" name="taskTitle[]" class="form-control" required>
-                    <!-- Add more task fields as needed -->
-                </div>
-            </div>
-        `;
-        taskContainer.appendChild(newTask);
+        // Hide the existing form
+
+        taskTitles.push(document.getElementById("taskTitle").value);
+        taskDescriptions.push(document.getElementById("taskDescription").value);
+        taskStartDates.push(document.getElementById("taskStartDate").value);
+        taskEndDates.push(document.getElementById("taskEndDate").value);
+
+        document.getElementById("taskTitle").value = "";
+        document.getElementById("taskDescription").value = "";
+        document.getElementById("taskStartDate").value= "";
+        document.getElementById("taskEndDate").value = "";
+
+        console.log(taskTitles, taskDescriptions, taskStartDates, taskEndDates);
     });
+
+    function sendData(event){
+        event.preventDefault();
+        var projectName = document.getElementById("projectName").value;
+        var startDate = document.getElementById("startDate").value;
+        var endDate = document.getElementById("endDate").value;
+        var description = document.getElementById("description").value;
+        var budget = document.getElementById("budget").value;
+        console.log(taskTitles,taskDescriptions,taskStartDates,taskEndDates);
+        fetch("http://localhost:8080/ConstructionXpertServices_war_exploded/addPojectTask"
+            , {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    projectName: projectName,
+                    startDate: startDate,
+                    endDate: endDate,
+                    description: description,
+                    budget: budget,
+                    taskTitle: [...taskTitles],
+                    taskDescription: [...taskDescriptions],
+                    taskStartDate: [...taskStartDates],
+                    taskEndDate: [...taskEndDates]
+                })
+            })
+    }
+
 </script>
+
 </body>
 </html>

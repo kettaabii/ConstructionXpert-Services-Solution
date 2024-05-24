@@ -14,21 +14,38 @@ public class ProjectDaoImpl implements ProjectDao {
 
 
     @Override
-    public void createProject(Project project) throws SQLException {
-        String sql = "INSERT INTO project (id, projectName, description, budget, dateDebut, dateFin) VALUES (?,?,?,?,?,?)";
+    public Project createProject(Project project) throws SQLException {
+        String sql = "INSERT INTO project (projectName, description, budget, dateDebut, dateFin) VALUES (?,?,?,?,?)";
         Connection con = Connectiondb.getConnection();
+        Project pr = new Project();
 
         try (PreparedStatement statement = con.prepareStatement(sql)) {
-            statement.setInt(1, project.getId());
-            statement.setString(2, project.getProjectName());
-            statement.setString(3, project.getDescription());
-            statement.setDouble(4, project.getBudget());
-            statement.setDate(5, project.getDateDebut());
-            statement.setDate(6, project.getDateFin());
+            statement.setString(1, project.getProjectName());
+            statement.setString(2, project.getDescription());
+            statement.setDouble(3, project.getBudget());
+            statement.setDate(4, project.getDateDebut());
+            statement.setDate(5, project.getDateFin());
             statement.executeUpdate();
+
+            return getProjectByname(project, con, pr);
 
         }
 
+    }
+
+    public Project getProjectByname(Project project, Connection con, Project pr) throws SQLException {
+        PreparedStatement statement1 = con.prepareStatement("select * from project where projectName = ?");
+        statement1.setString(1, project.getProjectName());
+        ResultSet resultSet = statement1.executeQuery();
+        while (resultSet.next()) {
+            pr.setId(resultSet.getInt("id"));
+            pr.setProjectName(resultSet.getString("projectName"));
+            pr.setDescription(resultSet.getString("description"));
+            pr.setBudget(resultSet.getDouble("budget"));
+            pr.setDateDebut(resultSet.getDate("dateDebut"));
+            pr.setDateFin(resultSet.getDate("dateFin"));
+        }
+        return pr;
     }
 
     @Override
