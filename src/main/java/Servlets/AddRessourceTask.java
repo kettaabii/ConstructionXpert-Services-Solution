@@ -22,11 +22,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/addPojectTask")
-public class AddProjectTask extends HttpServlet {
+@WebServlet("/addRessourceTask")
+public class AddRessourceTask extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
+        Integer id = Integer.valueOf(request.getParameter("projectId"));
 
         response.setContentType("text/html");
         request.getRequestDispatcher("WEB-INF/views/addnewproject.jsp").forward(request,response);
