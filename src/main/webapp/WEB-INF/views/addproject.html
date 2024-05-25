@@ -651,38 +651,67 @@
   }
 
 
-  @media screen and (max-width: 768px){
-    html{font-size: 10px;}
-    header{padding: 0 .8rem;}
-    .container{width: 100%; grid-template-columns: 1fr;margin: 0;}
-    header #profile-btn{display: inline;}
-    header .navbar{padding: 0;}
-    header .navbar a{margin: 0 .5rem 0 0;}
-    header .theme-toggler{margin: 0;}
-    aside{
+  @media screen and (max-width: 768px) {
+    html {
+      font-size: 10px;
+    }
+
+    header {
+      padding: 0 .8rem;
+    }
+
+    .container {
+      width: 100%;
+      grid-template-columns: 1fr;
+      margin: 0;
+    }
+
+    header #profile-btn {
+      display: inline;
+    }
+
+    header .navbar {
+      padding: 0;
+    }
+
+    header .navbar a {
+      margin: 0 .5rem 0 0;
+    }
+
+    header .theme-toggler {
+      margin: 0;
+    }
+
+    aside {
       position: absolute;
-      top: 4rem;left: 0;right: 0;
+      top: 4rem;
+      left: 0;
+      right: 0;
       background-color: var(--color-white);
       padding-left: 2rem;
       transform: translateX(-100%);
       z-index: 10;
-      width:18rem;
+      width: 18rem;
       height: 100%;
       box-shadow: 1rem 3rem 4rem var(--color-light);
       transition: all 2s ease;
     }
-    aside.active{
+
+    aside.active {
       transform: translateX(0);
     }
-    main{padding: 0 2rem;}
-    main .timetable{
+
+    main {
+      padding: 0 2rem;
+    }
+
+    main .timetable {
       position: relative;
       margin: 3rem 0 0 0;
       width: 100%;
     }
-
   }
-  </style>
+      </style>
 </head>
 <body>
 <header>
@@ -691,11 +720,11 @@
 
   </div>
   <div class="navbar">
-    <a href="index.html" class="active">
+    <a href="index.html" >
       <span class="material-icons-sharp">home</span>
       <h3>Home</h3>
     </a>
-    <a href="timetable.html">
+    <a href="timetable.html" class="active">
       <span class="material-icons-sharp">home_work</span>
       <h3>Projects</h3>
     </a>
@@ -773,58 +802,88 @@
 
   <main>
     <h1>Projects :</h1>
-    <div class="main-container">
+    <div class="main-container" style="display: grid;grid-template-columns: 40rem auto ;
+    margin: 0 3rem;
+    gap: 1.8rem;
+    padding-top: 4rem;">
       <div class="leftform" >
         <div class="FormLeft">
-          <h1> Project informations :</h1>
-          <form >
-            <div class="projectForm" style="display: flex;gap:3rem;">
-            <div class="left_info_form">
-            <label for="projectName">Project Name:</label><br>
-            <input type="text" id="projectName" name="projectName" required><br>
+          <h1 style="background-color: #f36f2e;"> Project informations :</h1>
+          <form action="addPojectTask" method="post" onsubmit="sendData(event)" >
+            <div class="projectForm" style="display: flex;gap:3rem;border: 1px solid #f36f2e; ">
+              <div class="left_info_form" style="margin: 1rem;">
+                <label for="projectName">Project Name:</label><br>
+                <input type="text" id="projectName" name="projectName" required><br>
 
-            <label for="startDate">Start Date:</label><br>
-            <input type="date" id="startDate" name="startDate" required><br>
+                <label for="startDate">Start Date:</label><br>
+                <input type="date" id="startDate" name="startDate" required><br>
 
-            <label for="endDate">End Date:</label><br>
-            <input type="date" id="endDate" name="endDate" required><br>
-            </div>
-            <div class="right_info_form">
-
-            <label for="description">Description:</label><br>
-            <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
-
-
-
-
-
-            <label for="budget">Budget:</label><br>
-            <input type="number" id="budget" name="budget" required><br><br>
-            </div></div>
-            <h1>task infos</h1>
-            <div class="TaskForm" style="display: flex;gap:3rem;">
-
-              <div class="left_info_form">
-                <label for="TaskTitle">Task Title:</label><br>
-                <input type="text" id="TaskTitle" name="TaskTitle" required><br>
-
-                <label for="TaskstartDate">Start Date:</label><br>
-                <input type="date" id="TaskstartDate" name="TaskstartDate" required><br>
-
-                <label for="TaskendDate">End Date:</label><br>
-                <input type="date" id="TaskendDate" name="TaskendDate" required><br>
+                <label for="endDate">End Date:</label><br>
+                <input type="date" id="endDate" name="endDate" required><br>
               </div>
-              <div class="right_info_form">
+              <div class="right_info_form" style="margin: 1rem;">
 
-                <label for="Taskdescription">Description:</label><br>
-                <textarea id="Taskdescription" name="Taskdescription" rows="4" cols="50" required></textarea><br>
-                <button type="button" >Add Task</button>
+                <label for="description">Description:</label><br>
+                <textarea id="description" name="description" rows="4" cols="35" required></textarea><br>
+
+
+
+
+
+                <label for="budget">Budget:</label><br>
+                <input type="number" id="budget" name="budget" required><br><br>
+              </div></div>
+
+            <div id="tasksContainer" style="margin-top: 1rem;border: 1px solid #f36f2e; ">
+              <h1 style="background-color: #f36f2e">Tasks</h1>
+              <div id="task-card" class="task-card" style="display: flex;margin-top: 1rem;justify-content: space-around;">
+                <div>
+                <label for="taskTitle">Task Title:</label><br>
+                <input type="text" id="taskTitle" name="taskTitle" ><br>
+
+                <label for="taskStartDate">Start Date:</label><br>
+                <input type="date" id="taskStartDate" name="taskStartDate" ><br>
+
+                <label for="taskEndDate">End Date:</label><br>
+                <input type="date" id="taskEndDate" name="taskEndDate" ><br>
+                </div>
+                <label for="taskDescription">Description:</label><br>
+                <textarea id="taskDescription" name="taskDescription" rows="5" cols="30" required></textarea><br>
               </div>
+              <button style="display: inline-block;
+    color: #ffffff;
+    text-align: center;
+    border: none;
+    background-color: #f36f2e;
+    font-size: 1rem;
+    line-height: 1.5;
+    cursor: pointer;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 50px;
+    margin-top: 10px;" type="button" id="addTaskButton">Add Task</button><br><br>
             </div>
-              <input type="submit" value="Submit">
+
+
+
+
+
+            <input style="display: inline-block;color: #ffffff; text-align: center;vertical-align: middle;  border: 1px solid transparent;  background: #f36f2e;  font-size: 1rem;  line-height: 1.5;  cursor: pointer;  width: 10rem;  height: 3rem;border-radius: 50px;" type="submit" value="Submit">
           </form>
         </div>
 
+
+      </div>
+      <div class="righttasks" style="border: 1px solid orange;display: flex;flex-direction: column; align-items: center;" >
+        <h1 style="background-color: orange; width: 100%;">Tasks</h1>
+        <div class="tasktoast" id="tasktoast" style="width: 95%; display: block; margin-top: 1rem; ">
+          <div class="task-toast-container" style="border: 1px solid orange; border-radius: 6px;">
+            <div class="">
+              <button class="btn-close">×</button>
+            </div>
+            <p class="text-content" >Task title here </p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -832,6 +891,78 @@
 
 
 </div>
+<script>
+  var taskTitles = [];
+  var taskDescriptions = [];
+  var taskStartDates = [];
+  var taskEndDates = [];
+
+  document.getElementById("addTaskButton").addEventListener("click", function() {
+    // Hide the existing form
+
+    taskTitles.push(document.getElementById("taskTitle").value);
+    taskDescriptions.push(document.getElementById("taskDescription").value);
+    taskStartDates.push(document.getElementById("taskStartDate").value);
+    taskEndDates.push(document.getElementById("taskEndDate").value);
+
+    document.getElementById("taskTitle").value = "";
+    document.getElementById("taskDescription").value = "";
+    document.getElementById("taskStartDate").value= "";
+    document.getElementById("taskEndDate").value = "";
+    addTaskTitles();
+    console.log(taskTitles, taskDescriptions, taskStartDates, taskEndDates);
+  });
+function addTaskTitles(){
+  var taskToastContainer=document.getElementById("tasktoast");
+  taskToastContainer.innerHTML="";
+  for (var i = 0; i < taskTitles.length; i++) {
+    var taskTitle = taskTitles[i];
+
+    var taskToast = document.createElement("div");
+    taskToast.className = "task-toast-container";
+    taskToast.innerHTML = ` <div class="task-toast-container" style="border: 1px solid orange; border-radius: 6px;">
+            <div class="">
+              <button class="btn-close">×</button>
+            </div>
+            <p class="text-content" >${taskTitle}</p>
+          </div>
+        `;
+
+    taskToastContainer.appendChild(taskToast);
+  }
+}
+
+
+  function sendData(event){
+    event.preventDefault();
+    var projectName = document.getElementById("projectName").value;
+    var startDate = document.getElementById("startDate").value;
+    var endDate = document.getElementById("endDate").value;
+    var description = document.getElementById("description").value;
+    var budget = document.getElementById("budget").value;
+    console.log(taskTitles,taskDescriptions,taskStartDates,taskEndDates);
+    fetch("http://localhost:8080/ConstructionXpertServices_war_exploded/addPojectTask"
+            , {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                projectName: projectName,
+                startDate: startDate,
+                endDate: endDate,
+                description: description,
+                budget: budget,
+                taskTitle: [...taskTitles],
+                taskDescription: [...taskDescriptions],
+                taskStartDate: [...taskStartDates],
+                taskEndDate: [...taskEndDates]
+              })
+            })
+  }
+
+</script>
 
 </body>
 </html>

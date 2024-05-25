@@ -776,9 +776,9 @@
         <div class="main-container">
             <div class="leftform" >
                 <div class="FormLeft">
-                    <h1> Project informations :</h1>
+                    <h1 style="background-color: #2aaf1e;"> Project informations :</h1>
                     <form action="addPojectTask" method="post" onsubmit="sendData(event)" >
-                        <div class="projectForm" style="display: flex;gap:3rem;">
+                        <div class="projectForm" style="display: flex;gap:3rem;border: 1px solid #2aaf1e; ">
                             <div class="left_info_form">
                                 <label for="projectName">Project Name:</label><br>
                                 <input type="text" id="projectName" name="projectName" required><br>

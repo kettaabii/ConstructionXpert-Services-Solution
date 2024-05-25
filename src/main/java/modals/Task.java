@@ -117,5 +117,18 @@ public class Task {
         FAITE
     }
 
-
+    @Override
+    public String toString() {
+        return "Task{" +
+                "idTask=" + idTask +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", dateDebutTache=" + dateDebutTache +
+                ", dateFinTache=" + dateFinTache +
+                ", ProjectId=" + ProjectId +
+                ", status=" + status +
+                ", assignedEmployeeId=" + assignedEmployeeId +
+                ", requiredResourceIds=" + requiredResourceIds +
+                '}';
+    }
 }

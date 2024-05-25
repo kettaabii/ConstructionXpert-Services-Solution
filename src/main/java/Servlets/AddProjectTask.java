@@ -42,12 +42,26 @@ public class AddProjectTask extends HttpServlet {
         String endDate = (String) requestData.get("endDate");
         String description = (String) requestData.get("description");
         String budget = (String) requestData.get("budget");
+// Extract project data
+        System.out.println("Project Name: " + projectName);
+        System.out.println("Start Date: " + startDate);
+        System.out.println("End Date: " + endDate);
+        System.out.println("Description: " + description);
+        System.out.println("Budget: " + budget);
+
 
         // Extract task data
-        String[] taskTitles = request.getParameterValues("taskTitle");
-        String[] taskDescriptions = request.getParameterValues("taskDescription");
-        String[] taskStartDates = request.getParameterValues("taskStartDate");
-        String[] taskEndDates = request.getParameterValues("taskEndDate");
+        // Extract task data from the request body map
+        String[] taskTitles = objectMapper.convertValue(requestData.get("taskTitle"), String[].class);
+        String[] taskDescriptions = objectMapper.convertValue(requestData.get("taskDescription"), String[].class);
+        String[] taskStartDates = objectMapper.convertValue(requestData.get("taskStartDate"), String[].class);
+        String[] taskEndDates = objectMapper.convertValue(requestData.get("taskEndDate"), String[].class);
+// Extract task data
+        System.out.println("Task Titles: " + Arrays.toString(taskTitles));
+        System.out.println("Task Descriptions: " + Arrays.toString(taskDescriptions));
+        System.out.println("Task Start Dates: " + Arrays.toString(taskStartDates));
+        System.out.println("Task End Dates: " + Arrays.toString(taskEndDates));
+
 
         // Process the extracted data to create projects and tasks
         ProjectDaoImpl projectDao = new ProjectDaoImpl();
@@ -71,14 +85,15 @@ public class AddProjectTask extends HttpServlet {
                     task.setDescription(taskDescriptions[i]);
                     task.setDateDebutTache(Date.valueOf(taskStartDates[i]));
                     task.setDateFinTache(Date.valueOf(taskEndDates[i]));
-                    task.setStatus(Status.A_FAIRE);;
+                    task.setStatus(Status.A_FAIRE);
+                    task.setProjectId(createdProject.getId()); // Set the project ID for the task
                     taskDao.addTask(task);
-                    System.out.println(task);
+                    System.out.println(task); // Print task object after setting properties
                 }
             }
 
-            // Redirect to success page
             response.sendRedirect("success.jsp");
+            System.out.println("Redirecting to success page...");
         } catch (SQLException e) {
             // Handle any potential database errors
             e.printStackTrace();
