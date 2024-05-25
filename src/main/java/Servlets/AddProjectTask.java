@@ -19,6 +19,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/addPojectTask")
@@ -42,31 +43,17 @@ public class AddProjectTask extends HttpServlet {
         String endDate = (String) requestData.get("endDate");
         String description = (String) requestData.get("description");
         String budget = (String) requestData.get("budget");
-// Extract project data
-        System.out.println("Project Name: " + projectName);
-        System.out.println("Start Date: " + startDate);
-        System.out.println("End Date: " + endDate);
-        System.out.println("Description: " + description);
-        System.out.println("Budget: " + budget);
-
 
         // Extract task data
-        // Extract task data from the request body map
         String[] taskTitles = objectMapper.convertValue(requestData.get("taskTitle"), String[].class);
         String[] taskDescriptions = objectMapper.convertValue(requestData.get("taskDescription"), String[].class);
         String[] taskStartDates = objectMapper.convertValue(requestData.get("taskStartDate"), String[].class);
         String[] taskEndDates = objectMapper.convertValue(requestData.get("taskEndDate"), String[].class);
-// Extract task data
-        System.out.println("Task Titles: " + Arrays.toString(taskTitles));
-        System.out.println("Task Descriptions: " + Arrays.toString(taskDescriptions));
-        System.out.println("Task Start Dates: " + Arrays.toString(taskStartDates));
-        System.out.println("Task End Dates: " + Arrays.toString(taskEndDates));
-
 
         // Process the extracted data to create projects and tasks
         ProjectDaoImpl projectDao = new ProjectDaoImpl();
         TaskDaoImpl taskDao = new TaskDaoImpl();
-
+        Map<String, Object> responseData = new HashMap<>();
         try {
             // Create and insert project
             Project project = new Project();
@@ -88,17 +75,20 @@ public class AddProjectTask extends HttpServlet {
                     task.setStatus(Status.A_FAIRE);
                     task.setProjectId(createdProject.getId()); // Set the project ID for the task
                     taskDao.addTask(task);
-                    System.out.println(task); // Print task object after setting properties
                 }
             }
-
-            response.sendRedirect("success.jsp");
-            System.out.println("Redirecting to success page...");
+            System.out.println("fvfdbggbgbgb"+createdProject.getId());
+            // Set success response data with redirect URL
+            responseData.put("success", true);
+            responseData.put("redirect", "success.jsp?projectId=?" + createdProject.getId());
         } catch (SQLException e) {
-            // Handle any potential database errors
-            e.printStackTrace();
-            // Redirect to error page
-            response.sendRedirect("error.jsp");
+            // Set error response data
+            responseData.put("success", false);
+            responseData.put("errorMessage", e.getMessage());
         }
-}}
 
+        // Send the response JSON
+        response.setContentType("application/json");
+        objectMapper.writeValue(response.getWriter(), responseData);
+    }
+}

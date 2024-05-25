@@ -188,7 +188,7 @@
         --bg-search: #ffffff;
         --bg-hover: rgba(255, 137, 18, 0.78);
         --bg-item-active: rgba(255, 137, 18, 0.78);
-        --text-color: white;
+        --text-color: #232222;
         --placeholder-color: #dadada;
         --text-badge: #f5f5f5;
         --invert-black: 0%;

@@ -181,10 +181,10 @@
   /* Profile section  */
   :root {
     --bg-default: rgba(255, 137, 18, 0.78);
-    --bg-search: #ffffff;
+    --bg-search: #f6f2f2;
     --bg-hover: rgba(255, 137, 18, 0.78);
     --bg-item-active: rgba(255, 137, 18, 0.78);
-    --text-color: white;
+    --text-color: #232222;
     --placeholder-color: #dadada;
     --text-badge: #f5f5f5;
     --invert-black: 0%;
@@ -878,7 +878,7 @@
         <h1 style="background-color: orange; width: 100%;">Tasks</h1>
         <div class="tasktoast" id="tasktoast" style="width: 95%; display: block; margin-top: 1rem; ">
           <div class="task-toast-container" style="border: 1px solid orange; border-radius: 6px;">
-            <div class="">
+            <div >
               <button class="btn-close">×</button>
             </div>
             <p class="text-content" >Task title here </p>
@@ -921,9 +921,9 @@ function addTaskTitles(){
     var taskToast = document.createElement("div");
     taskToast.className = "task-toast-container";
     taskToast.innerHTML = ` <div class="task-toast-container" style="border: 1px solid orange; border-radius: 6px;">
-            <div class="">
+
               <button class="btn-close">×</button>
-            </div>
+
             <p class="text-content" >${taskTitle}</p>
           </div>
         `;

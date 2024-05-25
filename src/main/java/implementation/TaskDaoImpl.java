@@ -10,20 +10,21 @@ import java.util.List;
 public class TaskDaoImpl implements TaskDao {
 
     @Override
-    public void addTask(Task task) throws SQLException {
-        String sql = "INSERT INTO task (idTask, title, description, dateDebutTache, dateFinTache, statut, idProject) VALUES (?,?,?,?,?,?,?)";
+    public Task addTask(Task task) throws SQLException {
+        String sql = "INSERT INTO task ( title, description, dateDebutTache, dateFinTache, statut, idProject) VALUES (?,?,?,?,?,?)";
         Connection con = Connectiondb.getConnection();
 
         try (PreparedStatement statement = con.prepareStatement(sql)) {
-            statement.setInt(1, task.getIdTask());
-            statement.setString(2, task.getTitle());
-            statement.setString(3, task.getDescription());
-            statement.setDate(4, task.getDateDebutTache());
-            statement.setDate(5, task.getDateFinTache());
-            statement.setString(6, task.getStatus().toString()); // Utilisation de l'énumération
-            statement.setInt(7, task.getProjectId());
+
+            statement.setString(1, task.getTitle());
+            statement.setString(2, task.getDescription());
+            statement.setDate(3, task.getDateDebutTache());
+            statement.setDate(4, task.getDateFinTache());
+            statement.setString(5, task.getStatus().toString()); // Utilisation de l'énumération
+            statement.setInt(6, task.getProjectId());
             statement.execute();
         }
+        return task;
     }
 
     @Override

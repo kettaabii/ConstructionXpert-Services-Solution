@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface TaskDao {
-    void addTask(Task task) throws SQLException;
+    Task addTask(Task task) throws SQLException;
     void updateTask(Task task) throws SQLException;
 
     void updateTaskStatus(Task task) throws SQLException;
