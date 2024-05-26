@@ -1,5 +1,6 @@
 package DAO;
 
+import modals.Resource;
 import modals.Task;
 
 import java.sql.SQLException;
@@ -11,6 +12,8 @@ public interface TaskDao {
 
     void updateTaskStatus(Task task) throws SQLException;
 
+    void setTaskStatusEN_COURS(int idTask) throws SQLException;
+
     void deleteTask(Task task) throws SQLException;
     Task getTaskById(int id) throws SQLException;
 
@@ -21,10 +24,14 @@ public interface TaskDao {
 
     Integer getNumberOfOveralltasksByStatus()throws SQLException;
 
+    List<Task> getTasksByStatus(String status, int projectId) throws SQLException;
+
     Integer getNumberOfTotalTasksoOverall() throws SQLException;
 
     List<Task> getTasks();
     public List<Task> getTaskByProject(int idProjet) throws SQLException;
 
     void associateTaskWithProject(int taskId, int projectId) throws SQLException;
+
+    void addResourcesToTask(int taskId, List<Resource> resourcesToAdd) throws SQLException;
 }

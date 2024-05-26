@@ -645,7 +645,7 @@
                 <div class="Task-status-container" style="display: grid; grid-template-columns: 18rem auto auto;column-gap: 1.5rem;">
                     <div class="todo-task-container" style="border:1px solid darkgrey;border-radius: 6px;display: flex; flex-direction: column; ">
                         <h1 style="background-color: darkgrey; border-radius: 6px;">To Do</h1>
-                        <c:forEach var="task" items="${tasklist}">
+                        <c:forEach var="task" items="${tasksbystatusA_faire}">
                         <div class="task-toast" style="padding: 0.5rem;">
                             <a href="addRessourceTask?projectId=${task.projectId}&taskId=${task.idTask}">
                             <div class="task-toast-container" style="border: 1px solid darkgrey; border-radius: 6px;display: flex;justify-content: space-between;">
@@ -660,19 +660,25 @@
                         </c:forEach>
                     </div>
                     <div class="doing-task-container" style="border:1px solid orange;border-radius: 6px;display: flex; flex-direction: column; ">
-                        <h1 style="background-color: orange; border-radius: 6px;">dfljnfd</h1>
+                        <h1 style="background-color: orange; border-radius: 6px;">Doing</h1>
                         <div class="task-toast" style="padding: 0.5rem;">
+                            <c:forEach var="task" items="${tasksbystatusEN_COURS}">
                             <div class="task-toast-container" style="border: 1px solid orange; border-radius: 6px;display: flex;justify-content: space-between;">
-                                <div class="task-content">
-                                    <p  >Task title here </p>
-                                    <p>Task description here </p>
-                                </div>
-                                <span class="material-symbols-outlined">add_circle</span>
+                                <a href="addRessourceTask?projectId=${task.projectId}&taskId=${task.idTask}">
+                                    <div class="task-toast-container" style="border: 1px solid darkgrey; border-radius: 6px;display: flex;justify-content: space-between;">
+                                        <div class="task-content">
+                                            <p  >${task.title} </p>
+                                            <p>${task.description} </p>
+                                        </div>
+                                        <span class="material-symbols-outlined">add_circle</span>
+                                    </div>
+                                </a>
                             </div>
+                            </c:forEach>
                         </div>
                     </div>
                     <div class="done-task-container" style="border:1px solid lightgreen;border-radius: 6px;display: flex; flex-direction: column; ">
-                        <h1 style="background-color: lightgreen; border-radius: 6px;">dfljnfd</h1>
+                        <h1 style="background-color: lightgreen; border-radius: 6px;">Done</h1>
                         <div class="task-toast" style="padding: 0.5rem;">
                             <div class="task-toast-container" style="border: 1px solid lightgreen; border-radius: 6px;display: flex;justify-content: space-between;">
                                 <div class="task-content">
@@ -684,7 +690,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div></div>
                 <div class="ressource-container" style="border:1px solid orange;border-radius: 6px;display: flex; flex-direction: column; display: none; ">
                     <h1 style="background-color: orange">Ressources</h1>
                     <div class="header-container" style="display: flex;justify-content: space-between;width: 93%;margin-left: 2rem;">

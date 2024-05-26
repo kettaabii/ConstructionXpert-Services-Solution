@@ -12,20 +12,21 @@ public class Task {
     private int ProjectId ;
     private Status status;
     private int assignedEmployeeId;
-    private List<Integer> requiredResourceIds;
+    private List<Resource> resources;
 
 
-    public Task(int idTask, String title, String description, Date dateDebutTache, Date dateFinTache, Status status, int projectId, int assignedEmployee, List<Integer> requiredResourceIds) {
+    public Task(int idTask, String title, String description, Date dateDebutTache, Date dateFinTache, int projectId, Status status, int assignedEmployeeId, List<Resource> resources) {
         this.idTask = idTask;
         this.title = title;
         this.description = description;
         this.dateDebutTache = dateDebutTache;
         this.dateFinTache = dateFinTache;
+        ProjectId = projectId;
         this.status = status;
-        this.ProjectId = projectId;
-        this.assignedEmployeeId = assignedEmployee;
-        this.requiredResourceIds = requiredResourceIds;
+        this.assignedEmployeeId = assignedEmployeeId;
+        this.resources = resources;
     }
+
     public Task(int idTask, String title, String description, Date dateDebutTache, Date dateFinTache, Status status, int idProjet) {
         this.idTask = idTask;
         this.title = title;
@@ -95,12 +96,12 @@ public class Task {
         this.assignedEmployeeId = assignedEmployeeId;
     }
 
-    public List<Integer> getRequiredResourceIds() {
-        return requiredResourceIds;
+    public List<Resource> getResources() {
+        return resources;
     }
 
-    public void setRequiredResourceIds(List<Integer> requiredResourceIds) {
-        this.requiredResourceIds = requiredResourceIds;
+    public void setResources(List<Resource> resources) {
+        this.resources = resources;
     }
 
     public int getProjectId() {
@@ -128,7 +129,7 @@ public class Task {
                 ", ProjectId=" + ProjectId +
                 ", status=" + status +
                 ", assignedEmployeeId=" + assignedEmployeeId +
-                ", requiredResourceIds=" + requiredResourceIds +
+
                 '}';
     }
 }

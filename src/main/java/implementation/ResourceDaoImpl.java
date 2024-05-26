@@ -1,7 +1,7 @@
 package implementation;
 
 import DAO.ResourceDao;
-import modals.Ressources;
+import modals.Resource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,32 +13,32 @@ import java.util.List;
 public class ResourceDaoImpl implements ResourceDao {
 
     @Override
-    public void addResource(Ressources resource) throws SQLException {
-        String sql = "INSERT INTO ressources (ressourceId,ressourceName,ressourceDesctription,quatntity,supplier,taskId) VALUES (?,?,?,?,?,?)";
+    public void addResource(Resource resource) throws SQLException {
+        String sql = "INSERT INTO ressources (ressourceId,ressourceName,ressourceDesctription,quantity,supplier,idTask) VALUES (?,?,?,?,?,?)";
         Connection con = Connectiondb.getConnection();
 
         try (PreparedStatement statement = con.prepareStatement(sql)) {
-            statement.setInt(1, resource.getRessourceId());
-            statement.setString(2, resource.getRessourceName());
-            statement.setString(3, resource.getRessourceDescription());
+            statement.setInt(1, resource.getResourceId());
+            statement.setString(2, resource.getResourceName());
+            statement.setString(3, resource.getResourceDescription());
             statement.setInt(4, resource.getQuantity());
             statement.setString(5, resource.getSupplier());
-            statement.setInt(6, resource.getIdTask());
+            statement.setInt(6, resource.getTaskId());
             statement.executeUpdate();
         }
     }
 
     @Override
-    public void updateResource(Ressources resource) throws SQLException {
-        String sql = "UPDATE constructionxpert.ressources SET ressourceName=?, ressourceDesctription=?, quatntity=?, supplier=?, taskId=? WHERE ressourceId=?";
+    public void updateResource(Resource resource) throws SQLException {
+        String sql = "UPDATE constructionxpert.ressources SET ressourceName=?, ressourceDesctription=?, quantity=?, supplier=?, idTask=? WHERE ressourceId=?";
         Connection con = Connectiondb.getConnection();
         try (PreparedStatement statement = con.prepareStatement(sql)) {
-            statement.setString(1, resource.getRessourceName());
-            statement.setString(2, resource.getRessourceDescription());
+            statement.setString(1, resource.getResourceName());
+            statement.setString(2, resource.getResourceDescription());
             statement.setInt(3, resource.getQuantity());
             statement.setString(4, resource.getSupplier());
-            statement.setInt(5, resource.getIdTask());
-            statement.setInt(6, resource.getRessourceId());
+            statement.setInt(5, resource.getTaskId());
+            statement.setInt(6, resource.getResourceId());
             statement.executeUpdate();
         }
     }
@@ -54,17 +54,17 @@ public class ResourceDaoImpl implements ResourceDao {
     }
 
     @Override
-    public Ressources getResourceById(int resourceId) throws SQLException {
+    public Resource getResourceById(int resourceId) throws SQLException {
         String sql = "SELECT * FROM ressources WHERE ressourceId=?";
         Connection con = Connectiondb.getConnection();
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setInt(1, resourceId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    return new Ressources(
-                            resultSet.getInt("resourceId"),
-                            resultSet.getString("resourceName"),
-                            resultSet.getString("resourceDescription"),
+                    return new Resource(
+                            resultSet.getInt("ressourceId"),
+                            resultSet.getString("ressourceName"),
+                            resultSet.getString("ressourceDesctription"),
                             resultSet.getInt("quantity"),
                             resultSet.getString("supplier"),
                             resultSet.getInt("idTask")
@@ -76,15 +76,15 @@ public class ResourceDaoImpl implements ResourceDao {
     }
 
     @Override
-    public List<Ressources> getResourcesByTaskId(int taskId) throws SQLException {
-        List<Ressources> resources = new ArrayList<>();
-        String sql = "SELECT * FROM ressources WHERE taskId=?";
+    public List<Resource> getResourcesByTaskId(int taskId) throws SQLException {
+        List<Resource> resources = new ArrayList<>();
+        String sql = "SELECT * FROM ressources WHERE idTask=?";
         Connection con = Connectiondb.getConnection();
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setInt(1, taskId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    resources.add(new Ressources(
+                    resources.add(new Resource(
                             resultSet.getInt("resourceId"),
                             resultSet.getString("resourceName"),
                             resultSet.getString("resourceDescription"),
@@ -99,17 +99,17 @@ public class ResourceDaoImpl implements ResourceDao {
     }
 
     @Override
-    public List<Ressources> getAllResources() throws SQLException {
-        List<Ressources> resources = new ArrayList<>();
+    public List<Resource> getAllResources() throws SQLException {
+        List<Resource> resources = new ArrayList<>();
         String sql = "SELECT * FROM ressources";
         Connection con = Connectiondb.getConnection();
         try (PreparedStatement statement = con.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
-                resources.add(new Ressources(
-                        resultSet.getInt("resourceId"),
-                        resultSet.getString("resourceName"),
-                        resultSet.getString("resourceDescription"),
+                resources.add(new Resource(
+                        resultSet.getInt("ressourceId"),
+                        resultSet.getString("ressourceName"),
+                        resultSet.getString("ressourceDesctription"),
                         resultSet.getInt("quantity"),
                         resultSet.getString("supplier"),
                         resultSet.getInt("idTask")

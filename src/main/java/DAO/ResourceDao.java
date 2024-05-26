@@ -1,5 +1,6 @@
 package DAO;
-import modals.Ressources;
+import modals.Resource;
+import modals.Resource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ResourceDao {
-    void addResource(Ressources resource) throws SQLException;
-    void updateResource(Ressources resource) throws SQLException;
+    void addResource(Resource resource) throws SQLException;
+    void updateResource(Resource resource) throws SQLException;
     void deleteResource(int resourceId) throws SQLException;
-    Ressources getResourceById(int resourceId) throws SQLException;
-    List<Ressources> getResourcesByTaskId(int taskId) throws SQLException;
-    List<Ressources> getAllResources() throws SQLException;
+    Resource getResourceById(int resourceId) throws SQLException;
+    List<Resource> getResourcesByTaskId(int taskId) throws SQLException;
+    List<Resource> getAllResources() throws SQLException;
 }

@@ -1,6 +1,7 @@
 package implementation;
 
 import DAO.TaskDao;
+import modals.Resource;
 import modals.Task;
 
 import java.sql.*;
@@ -50,6 +51,16 @@ public class TaskDaoImpl implements TaskDao {
         try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setString(1, task.getStatus().toString()); // Utilisation de l'énumération
             statement.setInt(2, task.getIdTask());
+            statement.executeUpdate();
+        }
+    }
+    @Override
+    public void setTaskStatusEN_COURS(int idTask) throws SQLException {
+        String sql = "UPDATE task SET statut=? WHERE idTask=?";
+        Connection con = Connectiondb.getConnection();
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, Task.Status.EN_COURS.toString());
+            statement.setInt(2, idTask);
             statement.executeUpdate();
         }
     }
@@ -118,6 +129,29 @@ public class TaskDaoImpl implements TaskDao {
     public Integer getNumberOfOveralltasksByStatus() throws SQLException {
         return 0;
     }
+    @Override
+    public List<Task> getTasksByStatus(String status, int projectId) throws SQLException {
+        String sql = "SELECT * FROM task WHERE statut=? AND idProject=? ";
+        Connection con = Connectiondb.getConnection();
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, status);
+            statement.setInt(2, projectId);
+            ResultSet resultSet = statement.executeQuery();
+            List<Task> tasks = new ArrayList<>();
+            while (resultSet.next()) {
+                int idTask = resultSet.getInt("idTask");
+                String title = resultSet.getString("title");
+                String description = resultSet.getString("description");
+                Date dateDebutTache = resultSet.getDate("dateDebutTache");
+                Date dateFinTache = resultSet.getDate("dateFinTache");
+
+               Task task =new Task(idTask,title,description,dateDebutTache,dateFinTache,Task.Status.valueOf(status),projectId);
+
+                tasks.add(task);
+            }
+        return tasks;
+        }
+    }
 
     @Override
     public Integer getNumberOfTotalTasksoOverall() throws SQLException{
@@ -176,6 +210,17 @@ public class TaskDaoImpl implements TaskDao {
             statement.setInt(2, taskId);
             statement.executeUpdate();
         }
+    }
+    @Override
+    public void addResourcesToTask(int taskId, List<Resource> resourcesToAdd) throws SQLException {
+        String sql ="INSERT INTO taskresource (taskId, resourceId) VALUES (?,?)";
+        Connection con = Connectiondb.getConnection();
+        PreparedStatement statement = con.prepareStatement(sql);
+        statement.setInt(1, taskId);
+        statement.setInt(2, resourcesToAdd.size());
+        statement.executeUpdate();
+        statement.close();
+
     }
 }
 

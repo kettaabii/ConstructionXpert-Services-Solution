@@ -22,13 +22,25 @@ public class ShowTasksForProject extends HttpServlet {
         int idProjet = Integer.parseInt(request.getParameter("projectId"));
         System.out.println("this is id project "+idProjet);
         List<Task> taches = null;
+        List<Task> tasksbystatusA_faire = null;
+        List<Task> tasksbystatusEN_COURS = null;
+        List<Task> tasksbystatusFAITE = null;
         try {
             taches = tacheDAO.getTaskByProject(idProjet);
+            tasksbystatusA_faire=tacheDAO.getTasksByStatus("A_FAIRE",idProjet);
+            tasksbystatusEN_COURS=tacheDAO.getTasksByStatus("EN_COURS",idProjet);
+            tasksbystatusFAITE=tacheDAO.getTasksByStatus("FAITE",idProjet);
+            System.out.println("tasksbystatusA_faire "+tasksbystatusA_faire);
+            tasksbystatusA_faire.forEach( System.out::println);
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        request.setAttribute("tasksbystatusEN_COURS", tasksbystatusEN_COURS);
+        request.setAttribute("tasksbystatusFAITE", tasksbystatusFAITE);
         request.setAttribute("tasklist", taches);
+        request.setAttribute("tasksbystatusA_faire", tasksbystatusA_faire);
+
         request.getRequestDispatcher("/WEB-INF/views/Addressource&affect.jsp").forward(request, response);
     }
 }

@@ -1,10 +1,16 @@
+<%@ page import="modals.Task" %>
+<%@ page import="java.util.List" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="shortcut icon" href="./images/logo.png">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -30,14 +36,6 @@
         --box-shadow: 0 2rem 3rem var(--color-light)
     }
 
-    .dark-theme{
-        --color-background: #181a1e;
-        --color-white: #202528;
-        --color-dark: #edeffd;
-        --color-dark-varient: #a3bdcc;
-        --color-light: rgba(0,0,0,0.4);
-        --box-shadow: 0 2rem 3rem var(--color-light)
-    }
 
 
     *{
@@ -77,14 +75,9 @@
     h5{font-size: .77rem;}
     small{font-size: .75rem;}
 
-    .text-muted{color: var(--color-info);}
-    p{color: var(--color-dark-varient);}
-    b{color: var(--color-dark);}
 
-    .primary{color: var(--color-primary);}
-    .danger{color: var(--color-danger);}
-    .success{color: var(--color-success)}
-    .warning{color: var(--color-warning);}
+
+
 
     .container{
         position: relative;
@@ -147,45 +140,19 @@
         width: 100%;
         left: 0;top: 0;
     }
-    header #profile-btn{
-        display: none;
-        font-size: 2rem;
-        margin: .5rem 2rem 0 0;
-        cursor: pointer;
-    }
-    header .theme-toggler{
-        background: var(--color-light);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 1.6rem;
-        width: 4.2rem;
-        cursor: pointer;
-        border-radius: var(--border-radius-1);
-        margin-right: 2rem;
-    }
-    header .theme-toggler span{
-        font-size: 1.2rem;
-        width: 50%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    header .theme-toggler span.active{
-        background-color: var(--color-primary);
-        color: white;
-        border-radius: var(--border-radius-1);
-    }
+
+
+
+
 
     /* Profile section  */
     :root {
         --bg-default: rgba(255, 137, 18, 0.78);
-        --bg-search: #f6f2f2;
+        --bg-search: #ffffff;
         --bg-hover: rgba(255, 137, 18, 0.78);
         --bg-item-active: rgba(255, 137, 18, 0.78);
         --text-color: #232222;
-        --placeholder-color: #dadada;
+        --placeholder-color: #bfbdbd;
         --text-badge: #f5f5f5;
         --invert-black: 0%;
     }
@@ -195,106 +162,32 @@
 
 
 
-    aside .sidebar {
-        background-color: var(--bg-default);
-        width: 280px;
-        height: fit-content;
-        border-radius: 16px;
-        padding: 16px;
-        position: relative;
 
-        transition: all ease-in-out 300ms;
-    }
 
-    .sidebar.open {
-        width: 80px;
-    }
 
-    .sidebar.open {
-        width: 60px;
-    }
 
-    .sidebar.open .sidebar-header {
-        justify-content: center;
-    }
 
-    .sidebar.open .sidebar-header span {
-        display: none;
-    }
 
-    .sidebar.open .open-close-menu {
-        transform: rotate(180deg);
-    }
 
-    .sidebar.open .search {
-        justify-content: center;
-    }
 
-    .sidebar.open .search input {
-        display: none;
-    }
 
-    .sidebar.open .sidebar-group-title {
-        text-align: center;
-    }
 
-    .sidebar.open .sidebar-item {
-        justify-content: center;
-    }
 
-    .sidebar.open .sidebar-item span {
-        display: none;
-    }
 
-    .sidebar.open .group-section .sidebar-item img:last-of-type {
-        display: none;
-    }
 
-    .sidebar.open .theme-container {
-        justify-content: center;
-    }
 
-    .sidebar.open .theme-container .theme:not(:has(input[type="radio"]:checked)) {
-        display: none;
-    }
 
-    .sidebar.open .theme-container .theme span {
-        display: none;
-    }
 
-    .sidebar.open .user-info-container .user-info,
-    .sidebar.open .user-info-container .svg-icon {
-        display: none;
-    }
 
-    .open-close-menu {
-        all: unset;
-        width: 32px;
-        height: 32px;
-        background-color: #1d66e6;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
 
-        top: 44px;
-        right: -16px;
 
-        cursor: pointer;
 
-        transition: all ease-in-out 150ms;
-    }
 
-    .open-close-menu:hover {
-        background-color: #1450ba;
-    }
 
-    .sidebar-header {
-        display: flex;
-        align-items: center;
-        margin-top: 24px;
-    }
+
+
+
+
 
     .sidebar-header img {
         width: 40px;
@@ -310,18 +203,16 @@
 
     .search {
         background-color: var(--bg-search);
-        margin-top: 40px;
-        border-radius: 16px;
 
+        border-radius: 16px;
+        border: 1px solid orange;
         padding: 8px;
         display: flex;
         align-items: center;
     }
 
     .search input[type="text"] {
-        all: unset;
-        width: 100%;
-        margin-left: 8px;
+
         color: var(--text-color);
     }
 
@@ -338,9 +229,7 @@
         margin-bottom: 12px;
     }
 
-    .svg-icon {
-        filter: invert(var(--invert-black));
-    }
+
 
     .sidebar-item {
         display: flex;
@@ -365,42 +254,22 @@
         z-index: 99;
     }
 
-    .sidebar-item:not(:first-of-type) {
-        margin-top: 16px;
-    }
+
 
     .sidebar-item span {
         display: inline-block;
         margin-left: 16px;
     }
 
-    .sidebar-item span.badge {
-        margin-left: auto;
-        margin-right: 16px;
-        background-color: #c73428;
-        padding: 4px 8px;
-        border-radius: 8px;
-        color: var(--text-badge);
-    }
+
 
     .sidebar-item:has(input[type="radio"]:checked) {
         background-color: var(--bg-item-active);
     }
 
-    .sidebar-item:has(input[type="radio"]:checked)::before {
-        content: "";
-        width: 8px;
-        height: 40px;
-        background-color: #c73428;
-        position: absolute;
-        left: -16px;
-        border-top-right-radius: 50%;
-        border-bottom-right-radius: 50%;
-    }
 
-    .sidebar-item:has(input[type="radio"]:checked) span {
-        font-weight: 500;
-    }
+
+
 
 
 
@@ -412,40 +281,12 @@
         cursor: pointer;
     }
 
-    .group-section .sidebar-item img:first-of-type {
-        width: 24px;
-        height: 24px;
-        padding: 4px;
-        border-radius: 50%;
-        background-color: #2aaf1e;
-        object-fit: contain;
-    }
 
-    .group-section .sidebar-item img:last-of-type {
-        margin-left: auto;
-    }
 
-    .group-section .sidebar-item:nth-of-type(2) img:first-of-type {
-        background-color: #2b3ee4;
-    }
 
-    .group-section .sidebar-item:nth-of-type(3) img:first-of-type {
-        background-color: #ec2222;
-    }
 
-    .group-section .sidebar-item:nth-of-type(4) img:first-of-type {
-        background-color: #e1e42b;
-    }
 
-    .theme-container {
-        display: flex;
-        margin-top: 32px;
-        background-color: var(--bg-search);
-        border-radius: 8px;
-        padding: 8px;
-        justify-content: space-between;
-        gap: 8px;
-    }
+
 
     .theme-container .theme {
         display: flex;
@@ -518,6 +359,11 @@
         grid-template-columns: repeat(5, 1fr);
         gap: 1.6rem;
     }
+    main .ressources{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1.6rem;
+    }
     main .main-container{
         background-color: var(--color-white);
         padding: var(--card-padding);
@@ -545,8 +391,7 @@
         color: var(--color-white);
         font-size: 1.5rem;
     }
-    main .projects > div.mth span,main .subjects > div.cg span{background: var(--color-danger);}
-    main .projects > div.cs span{background: var(--color-success);}
+
 
     main .projects h3{
         margin: 1rem 0 0.6rem;
@@ -643,11 +488,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 1;
         }
-        main .timetable{
-            width: 150%;
-            position: absolute;
-            padding: 4rem 0 0 0;
-        }
+
     }
 
 
@@ -720,15 +561,15 @@
 
     </div>
     <div class="navbar">
-        <a href="index.html" >
+        <a href="#" >
             <span class="material-icons-sharp">home</span>
             <h3>Home</h3>
         </a>
-        <a href="timetable.html" class="active">
+        <a href="#" >
             <span class="material-icons-sharp">home_work</span>
             <h3>Projects</h3>
         </a>
-        <a href="exam.html">
+        <a href="#" class="active">
             <span class="material-icons-sharp">construction</span>
             <h3>Ressources</h3>
         </a>
@@ -744,18 +585,12 @@
     <div id="profile-btn">
         <span class="material-icons-sharp">person</span>
     </div>
-    <div class="theme-toggler">
-        <span class="material-icons-sharp active">light_mode</span>
-        <span class="material-icons-sharp">dark_mode</span>
-    </div>
+
 
 </header>
 <div class="container">
     <aside>
-        <div class="search">
-            <span class="material-icons-sharp">today</span>
-            <input type="text" placeholder="Search..." />
-        </div>
+
         <section class="menu-section">
             <p class="sidebar-group-title">Menu</p>
             <div class="sidebar-item">
@@ -801,98 +636,58 @@
     </aside>
 
     <main>
-        <h1>Projects :</h1>
-        <div class="main-container" style="display: grid;grid-template-columns: 40rem auto ;
-    margin: 0 3rem;
-    gap: 1.8rem;
-    padding-top: 4rem;">
-            <div class="leftform" >
-                <div class="FormLeft">
-                    <h1 style="background-color: #f36f2e;"> Project informations :</h1>
-                    <form action="addPojectTask" method="post" onsubmit="sendData(event)" >
-                        <div class="projectForm" style="display: flex;gap:3rem;border: 1px solid #f36f2e; ">
-                            <div class="left_info_form" style="margin: 1rem;">
-                                <label for="projectName">Project Name:</label><br>
-                                <input type="text" id="projectName" name="projectName" required><br>
+        <div class="titles" style="display: flex;align-items: center;">
+            <h2>Add project </h2> <h3>Ressources</h3></div>
 
-                                <label for="startDate">Start Date:</label><br>
-                                <input type="date" id="startDate" name="startDate" required><br>
+        <div class="main-container">
+            <div class="ressource-container" style="border:1px solid orange;border-radius: 6px;display: flex; flex-direction: column; ">
+                <h1 style="background-color: orange">Ressources</h1>
 
-                                <label for="endDate">End Date:</label><br>
-                                <input type="date" id="endDate" name="endDate" required><br>
+
+                <form action="addRessourceTask" method="POST">
+                <div class="ressources" style=" margin-top: 2rem; display: grid; grid-template-columns: 13rem auto auto auto;column-gap:1rem; ">
+
+
+                        <input hidden="hidden" value="${taskId}" name="taskId">
+                        <input hidden="hidden" value="${projectId}" name="projectId">
+
+                        <c:forEach var="ressource" items="${ressourcelist}">
+                        <div class="card-res" style="background-color: #f6f6f9;display:flex; flex-direction:column;padding: 1rem;border-radius: 8px; ">
+
+                            <div class="ressource-card-head" style="display: flex; justify-content: space-between;">
+                                <h2>${ressource.resourceName} </h2>
                             </div>
-                            <div class="right_info_form" style="margin: 1rem;">
-
-                                <label for="description">Description:</label><br>
-                                <textarea id="description" name="description" rows="4" cols="35" required></textarea><br>
-
-
-
-
-
-                                <label for="budget">Budget:</label><br>
-                                <input type="number" id="budget" name="budget" required><br><br>
-                            </div></div>
-
-                        <div id="tasksContainer" style="margin-top: 1rem;border: 1px solid #f36f2e; ">
-                            <h1 style="background-color: #f36f2e">Tasks</h1>
-                            <div id="task-card" class="task-card" style="display: flex;margin-top: 1rem;justify-content: space-around;">
-                                <div>
-                                    <label for="taskTitle">Task Title:</label><br>
-                                    <input type="text" id="taskTitle" name="taskTitle" ><br>
-
-                                    <label for="taskStartDate">Start Date:</label><br>
-                                    <input type="date" id="taskStartDate" name="taskStartDate" ><br>
-
-                                    <label for="taskEndDate">End Date:</label><br>
-                                    <input type="date" id="taskEndDate" name="taskEndDate" ><br>
-                                </div>
-                                <label for="taskDescription">Description:</label><br>
-                                <textarea id="taskDescription" name="taskDescription" rows="5" cols="30" ></textarea><br>
+                            <div class="ressource-card-body" >
+                                <p>${ressource.resourceDescription}</p>
+                                <p>Available Quantity :${ressource.quantity} </p>
                             </div>
-                            <button style="display: inline-block;
-    color: #ffffff;
-    text-align: center;
-    border: none;
-    background-color: #f36f2e;
-    font-size: 1rem;
-    line-height: 1.5;
-    cursor: pointer;
-    width: 10rem;
-    height: 3rem;
-    border-radius: 50px;
-    margin-top: 10px;" type="button" id="addTaskButton">Add Task</button><br><br>
+                            <div class="footer-card" style="display: flex;justify-content: space-between;">
+                                <input style="width: 40%;" type="number" id="quantity_${ressource.resourceId}"  >
+                                <input type="checkbox" id="resource_${ressource.resourceId}" name="resources" value="${ressource.resourceId}">
+                                <label for="resource_${ressource.resourceId}">Select</label>
+                            </div>
+
                         </div>
+                        </c:forEach>
 
 
 
 
 
-                        <input style="display: inline-block;color: #ffffff; text-align: center;vertical-align: middle;  border: 1px solid transparent;  background: #f36f2e;  font-size: 1rem;  line-height: 1.5;  cursor: pointer;  width: 10rem;  height: 3rem;border-radius: 50px;" type="submit" value="Submit">
-                    </form>
+
+
                 </div>
+                    <input style="display: inline-block;color: #ffffff; text-align: center;vertical-align: middle;  border: 1px solid transparent;  background: #f36f2e;  font-size: 1rem;  line-height: 1.5;  cursor: pointer;  width: 10rem;  height: 3rem;border-radius: 50px;" type="submit" value="Submit">
 
-
+                </form>
             </div>
-            <div class="righttasks" style="border: 1px solid orange;display: flex;flex-direction: column; align-items: center;" >
-                <h1 style="background-color: orange; width: 100%;">Tasks</h1>
-                <div class="tasktoast" id="tasktoast" style="width: 95%; display: block; margin-top: 1rem; ">
-                    <div class="task-toast-container" style="border: 1px solid orange; border-radius: 6px;">
 
-                            <button class="btn-close">×</button>
-
-                        <p class="text-content" >Task title here </p>
-                    </div>
-                </div>
-            </div>
         </div>
-
     </main>
 
 
 </div>
-<script ><%@include file="/WEB-INF/js/ScripjsAddProject.js"%>
-
+<script>
 
 </script>
 
