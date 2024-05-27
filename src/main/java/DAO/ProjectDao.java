@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProjectDao {
     Project createProject(Project project) throws SQLException;
-    void updateProject(Project project) throws SQLException;
+    Project updateProject(Project project) throws SQLException;
     void deleteProject(Project project) throws SQLException;
     Project getProject(int id) throws SQLException;
     List<Project> getProjects() throws SQLException;

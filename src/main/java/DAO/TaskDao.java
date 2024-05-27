@@ -28,7 +28,7 @@ public interface TaskDao {
 
     Integer getNumberOfTotalTasksoOverall() throws SQLException;
 
-    List<Task> getTasks();
+
     public List<Task> getTaskByProject(int idProjet) throws SQLException;
 
     void associateTaskWithProject(int taskId, int projectId) throws SQLException;

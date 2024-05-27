@@ -26,6 +26,7 @@ import java.util.List;
 @WebServlet("/projectDetails")
 public class ProjectDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         int projectId = Integer.parseInt(request.getParameter("projectId"));
 
         // Fetch project details from the database

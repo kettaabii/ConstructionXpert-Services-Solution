@@ -1,10 +1,12 @@
 package Servlets;
 
 import DAO.ProjectDao;
+import DAO.TaskDao;
 import implementation.ProjectDaoImpl;
+import implementation.TaskDaoImpl;
 import modals.Project;
+import modals.Task;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,35 +16,37 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 
-@WebServlet("/Editproject")
-public class EditProjectServlet extends HttpServlet {
+@WebServlet("/EditTask")
+public class EditTaskServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ProjectDao projectDao = new ProjectDaoImpl();
-        int projectId = Integer.parseInt(request.getParameter("projectId"));
-        System.out.println("do get projectId: " + projectId);
+        TaskDao taskDao = new TaskDaoImpl();
+        int taskId = Integer.parseInt(request.getParameter("taskId"));
+
+        System.out.println("do get projectId: " + taskId);
         try {
-            request.setAttribute("project",projectDao.getProject(projectId));
+            request.setAttribute("task",taskDao.getTaskById(taskId));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
 
-        request.getRequestDispatcher("/WEB-INF/views/editproject.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/editTask.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ProjectDao projectDao = new ProjectDaoImpl();
+        TaskDao taskDao = new TaskDaoImpl();
+        int projectId = Integer.parseInt(request.getParameter("projectId"));
 
-        int projectId = Integer.valueOf(request.getParameter("idProject"));
-        System.out.println("do post projectId: " + projectId);
-        String projectName=request.getParameter("projectName");
-        Date startDate=Date.valueOf(request.getParameter("startDate"));
+        int taskId = Integer.valueOf(request.getParameter("taskId"));
+        int assignedEmployeeId =Integer.valueOf(request.getParameter("assignedEmployeeId"));
+        String taskName=request.getParameter("tasktitle");
+        Date startDate=Date.valueOf(request.getParameter("dateDebutTache"));
         Date endDate=Date.valueOf(request.getParameter("endDate"));
         String description=request.getParameter("description");
-        Double budget=Double.valueOf(request.getParameter("budget"));
-        Project project = new Project(projectId,projectName,description,budget,startDate,endDate);
+        Task.Status status = Task.Status.valueOf(request.getParameter("status"));
+        Task task = new Task(taskId,taskName,description,startDate,endDate,status,assignedEmployeeId);
         try {
-            projectDao.updateProject(project);
+            taskDao.updateTask(task);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

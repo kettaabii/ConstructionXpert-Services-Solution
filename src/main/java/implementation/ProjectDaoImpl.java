@@ -45,26 +45,30 @@ public class ProjectDaoImpl implements ProjectDao {
     }
 
     @Override
-    public void updateProject(Project project) throws SQLException {
+    public Project updateProject(Project project) throws SQLException {
         String sql="UPDATE project SET projectName=?,description =?,budget=?,dateDebut=?,dateFin=? WHERE id=? ";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, project.getId());
-            statement.setString(2, project.getProjectName());
-            statement.setString(3, project.getDescription());
-            statement.setDouble(4, project.getBudget());
-            statement.setDate(5, project.getDateDebut());
-            statement.setDate(6, project.getDateFin());
+        Connection con = Connectiondb.getConnection();
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+
+            statement.setString(1, project.getProjectName());
+            statement.setString(2, project.getDescription());
+            statement.setDouble(3, project.getBudget());
+            statement.setDate(4, project.getDateDebut());
+            statement.setDate(5, project.getDateFin());
+            statement.setInt(6, project.getId());
             statement.executeUpdate();
 
         }
 
 
+        return project;
     }
 
     @Override
     public void deleteProject(Project project) throws SQLException {
         String sql = "DELETE FROM project WHERE id=?";
-        try(PreparedStatement statement = connection.prepareStatement(sql)){
+        Connection con=Connectiondb.getConnection();
+        try(PreparedStatement statement = con.prepareStatement(sql)){
             statement.setInt(1, project.getId());
             statement.executeUpdate();
 

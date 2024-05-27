@@ -167,10 +167,7 @@ public class TaskDaoImpl implements TaskDao {
         return 0;
     }
 
-    @Override
-    public List<Task> getTasks() {
-        return List.of();
-    }
+
 
     public List<Task> getTaskByProject(int idProjet) throws SQLException {
         List<Task> tasks = new ArrayList<>();
