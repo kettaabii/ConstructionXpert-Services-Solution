@@ -43,6 +43,7 @@ public class DashboardServlet extends HttpServlet {
                 request.setAttribute("totalTasks", totalTasks);
 
             }
+            request.setAttribute("session", session);
             request.getRequestDispatcher("/WEB-INF/views/UserLogged.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);

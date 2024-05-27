@@ -552,7 +552,7 @@
 
     </div>
     <div class="navbar">
-        <a href="#" >
+        <a href="Dashboard" >
             <span class="material-icons-sharp">home</span>
             <h3>Home</h3>
         </a>
@@ -564,62 +564,33 @@
             <span class="material-icons-sharp">construction</span>
             <h3>Ressources</h3>
         </a>
-        <a href="password.html">
-            <span class="material-icons-sharp">today</span>
-            <h3>Today</h3>
-        </a>
-        <a href="#">
+
+        <a href="logout">
             <span class="material-icons-sharp" onclick="">logout</span>
             <h3>Logout</h3>
         </a>
     </div>
-    <div id="profile-btn">
-        <span class="material-icons-sharp">person</span>
-    </div>
+
 
 
 </header>
 <div class="container">
     <aside>
 
-        <section class="menu-section">
-            <p class="sidebar-group-title">Menu</p>
-            <div class="sidebar-item">
-                <input type="radio" name="sidebar-item" checked />
-                <span class="material-icons-sharp">add_circle</span>
-                <span>New Project</span>
-            </div>
-            <div class="sidebar-item">
-                <input type="radio" name="sidebar-item" />
-                <span class="material-icons-sharp">add_circle</span>
-                <span>New Task</span>
-                <span class="badge">
-            12
-          </span>
-            </div>
-            <div class="sidebar-item">
-                <input type="radio" name="sidebar-item" />
-                <span class="material-icons-sharp">group</span>
-                <span>Team</span>
-            </div>
-
-
-
-
-
-        </section>
 
 
         <div class="user-info-container">
+
             <img
-                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww&w=1000&q=80"
+                    src="<%=session.getAttribute("profile")%>"
                     alt=""
                     srcset=""
                     class="user-avatar"
             />
             <div class="user-info">
-                <p>Guilherme Sartori</p>
-                <span>meu.email@gmail.com</span>
+                <br /><span></span>
+                <p><%=session.getAttribute("username")%></p>
+                <span>Admin</span>
             </div>
             <img src="icons/log-out.svg" alt="" class="logout svg-icon" />
         </div>

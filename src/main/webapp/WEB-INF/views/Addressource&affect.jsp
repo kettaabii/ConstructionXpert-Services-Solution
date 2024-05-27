@@ -637,12 +637,17 @@
 
     <main>
         <div class="titles" style="display: flex;align-items: center;">
-            <h2>Add project </h2> <h3>Ressources</h3></div>
+            <h2>Add project </h2> <h3>  Ressources</h3></div>
 
         <div class="main-container">
             <div class="task-container">
+                <div class="btn-confirmation" style="display: flex;justify-content: right;marging:2rem;" >
 
-                <div class="Task-status-container" style="display: grid; grid-template-columns: 18rem auto auto;column-gap: 1.5rem;">
+                    <a href="Dashboard"> <input  type="button" style="display: inline-block;color: #ffffff; text-align: center;vertical-align: middle;  border: 1px solid transparent;  background: green ;  font-size: 1rem;  line-height: 1.5;  cursor: pointer;  width: 8rem;  height: 2rem;border-radius: 50px;" value="confirm "></a>
+
+                </div>
+                <div class="Task-status-container" style="display: grid; grid-template-columns: 18rem auto auto;column-gap: 1.5rem; margin-top: 2rem;">
+
                     <div class="todo-task-container" style="border:1px solid darkgrey;border-radius: 6px;display: flex; flex-direction: column; ">
                         <h1 style="background-color: darkgrey; border-radius: 6px;">To Do</h1>
                         <c:forEach var="task" items="${tasksbystatusA_faire}">
@@ -691,39 +696,7 @@
 
                     </div>
                 </div></div>
-                <div class="ressource-container" style="border:1px solid orange;border-radius: 6px;display: flex; flex-direction: column; display: none; ">
-                    <h1 style="background-color: orange">Ressources</h1>
-                    <div class="header-container" style="display: flex;justify-content: space-between;width: 93%;margin-left: 2rem;">
-                        <div class="search">
-                            <span class="material-icons-sharp">search</span>
-                            <input type="text" placeholder="Search..." >
-                            <span class="material-symbols-outlined">filter_alt</span>
-                        </div>
-
-                        <input style="display: inline-block;color: #ffffff; text-align: center;vertical-align: middle;  border: 1px solid transparent;  background: #f36f2e;  font-size: 1rem;  line-height: 1.5;  cursor: pointer;  width: 10rem;  height: 3rem;border-radius: 50px;" type="submit" value="Submit">
-                    </div>
-
-
-                    <div class="ressources" style=" margin-top: 2rem; display: grid; grid-template-columns: 13rem auto auto auto;column-gap:1rem; ">
-                        <div class="card-res" style="background-color: #f6f6f9;display:flex; flex-direction:column;padding: 1rem;border-radius: 8px; ">
-                            <div class="ressource-card-head" style="display: flex; justify-content: space-between;">
-                                <h2>ressource 1 </h2>
-                            </div>
-                            <div class="ressource-card-body" >
-                                <p>description</p>
-                                <p>Available Quantity : </p>
-                            </div>
-                            <div class="footer-card" style="display: flex;justify-content: space-between;">
-                                <input style="width: 40%;" type="number" id="quantity"  >
-
-                                <button type="button" class="btn btn-primary " style="border-radius: 6px; background-color: #2aaf1e;border: transparent; ">Add</button>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div></div>
+                </div>
     </main>
 
 

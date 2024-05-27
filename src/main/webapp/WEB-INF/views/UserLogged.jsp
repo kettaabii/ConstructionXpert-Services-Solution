@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.List" %>
 <%@ page import="modals.Project" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard</title>
-    <link rel="shortcut icon" href="./images/logo.png">
+    <title>ConstructionXpert</title>
+    <link rel="shortcut icon" href="assets/logo.png">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <style>@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
@@ -194,7 +195,13 @@
         --invert-black: 0%;
     }
 
-
+    aside{
+        width: 240px;
+        height: 500px;
+        margin-left: -35px;
+        padding: 20px;
+        border-radius: 10px;
+    }
 
 
 
@@ -311,7 +318,23 @@
         font-size: 1.5rem;
         font-weight: 500;
     }
-
+    .user-info-container{
+        background-color: rgba(128, 128, 128, 0.71);
+        width: 100%;
+        height: 50%;
+        margin-left: -10px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        gap: 20px;
+    }
+    .user-info-container p{
+        font-size: 15px;
+        font-weight: bold;
+        color: black;
+    }
     .search {
         background-color: var(--bg-search);
         margin-top: 40px;
@@ -385,6 +408,15 @@
         padding: 4px 8px;
         border-radius: 8px;
         color: var(--text-badge);
+    }
+    .online{
+        width: 10px;
+        height: 10px;
+        background-color: green;
+        border-radius: 50%;
+        position: absolute;
+        left: 104px;
+        top: 150px;
     }
 
     .sidebar-item:has(input[type="radio"]:checked) {
@@ -490,8 +522,8 @@
     }
 
     .user-info-container .user-avatar {
-        width: 40px;
-        height: 40px;
+        width: 100px;
+        height: 100px;
         border-radius: 50%;
         object-fit: cover;
     }
@@ -682,87 +714,46 @@
 </head>
 <body>
 <header>
-    <div class="logo" title="University Management System">
+    <div class="logo" title="Project Management System">
         <img src="https://i.ibb.co/h16QN6C/Construction-Xpert.png" alt="">
 
     </div>
     <div class="navbar">
-        <a href="index.html" class="active">
+        <a href="Dashboard" class="active">
             <span class="material-icons-sharp">home</span>
             <h3>Home</h3>
         </a>
-        <a href="timetable.html">
+        <a href="Dashboard">
             <span class="material-icons-sharp">home_work</span>
             <h3>Projects</h3>
         </a>
-        <a href="exam.html">
-            <span class="material-icons-sharp">construction</span>
-            <h3>Ressources</h3>
-        </a>
-        <a href="password.html">
-            <span class="material-icons-sharp">today</span>
-            <h3>Today</h3>
-        </a>
-        <a href="#">
+
+
+        <a href="logout">
             <span class="material-icons-sharp" onclick="">logout</span>
             <h3>Logout</h3>
         </a>
     </div>
-    <div id="profile-btn">
-        <span class="material-icons-sharp">person</span>
-    </div>
-    <div class="theme-toggler">
-        <span class="material-icons-sharp active">light_mode</span>
-        <span class="material-icons-sharp">dark_mode</span>
-    </div>
+
+
 
 </header>
 <div class="container">
     <aside>
-        <div class="search">
-            <span class="material-icons-sharp">today</span>
-            <input type="text" placeholder="Search..." />
-        </div>
-        <section class="menu-section">
-            <p class="sidebar-group-title">Menu</p>
-            <div class="sidebar-item">
-                <input type="radio" name="sidebar-item" checked />
-                <span class="material-icons-sharp">add_circle</span>
-                <span>New Project</span>
-            </div>
-            <div class="sidebar-item">
-                <input type="radio" name="sidebar-item" />
-                <span class="material-icons-sharp">add_circle</span>
-                <span>New Task</span>
-                <span class="badge">
-            12
-          </span>
-            </div>
-            <div class="sidebar-item">
-                <input type="radio" name="sidebar-item" />
-                <span class="material-icons-sharp">group</span>
-                <span>Team</span>
-            </div>
-
-
-
-
-
-        </section>
-
-
         <div class="user-info-container">
+            <div class="online">
+
+            </div>
             <img
-                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fHww&w=1000&q=80"
+                    src="<%=session.getAttribute("profile")%>"
                     alt=""
                     srcset=""
                     class="user-avatar"
             />
             <div class="user-info">
-                <p>Guilherme Sartori</p>
-                <span>meu.email@gmail.com</span>
+                <p><%=session.getAttribute("username")%></p>
+                <span>admin.email@gmail.com</span>
             </div>
-            <img src="icons/log-out.svg" alt="" class="logout svg-icon" />
         </div>
         </nav>
     </aside>
@@ -773,10 +764,10 @@
             <c:forEach var="projectData" items="${projectsData}">
                 <div class="eg"  data-done-tasks="${projectData.doneTasks}"
                      data-total-tasks="${projectData.totalTasks}">
-                        <div style="display:flex;justify-content: space-between;">
-                    <h3>${projectData.project.projectName}</h3>
-                            <div class="material-icons-sharp"><a href="projectDetails?projectId=${projectData.project.id}">more_horiz</a></div>
-                        </div>
+                    <div style="display:flex;justify-content: space-between;">
+                        <h3>${projectData.project.projectName}</h3>
+                        <div class="material-icons-sharp"><a href="projectDetails?projectId=${projectData.project.id}">more_horiz</a></div>
+                    </div>
                     <p>${projectData.project.budget}</p>
                     <h2 class>${projectData.doneTasks}/${projectData.totalTasks}
                     </h2>
