@@ -13,6 +13,7 @@ public class Task {
     private Status status;
     private int assignedEmployeeId;
     private List<Resource> resources;
+    private Employee assignedEmployee;
 
 
     public Task(int idTask, String title, String description, Date dateDebutTache, Date dateFinTache, int projectId, Status status, int assignedEmployeeId, List<Resource> resources) {
@@ -90,6 +91,14 @@ public class Task {
 
     public int getAssignedEmployeeId() {
         return assignedEmployeeId;
+    }
+
+    public Employee getAssignedEmployee() {
+        return assignedEmployee;
+    }
+
+    public void setAssignedEmployee(Employee assignedEmployee) {
+        this.assignedEmployee = assignedEmployee;
     }
 
     public void setAssignedEmployeeId(int assignedEmployeeId) {

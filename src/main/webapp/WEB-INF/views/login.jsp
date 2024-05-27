@@ -1,76 +1,91 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-<!DOCTYPE html>
-
-<html>
-<head>
-
-</head>
-<body>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Login</title>
+    <style>@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+    }
+
+    body {
+        background-color: #bfbdbd;
+    }
 
 
-    <title>Login Page</title>
-    <style> <%@include file="Style.css"%> </style>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    p {
+        margin-top: 5%;
+        margin-bottom: 5%;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #000;
+        line-height: 0.1em;
+    }
 
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    input {
+        margin-bottom: 3%;
+    }
+
+    input:last-of-type {
+        margin-bottom: 0;
+    }
+
+    input,
+    button {
+        padding: 3%;
+        margin: 3%;
+        width: 100%;
+    }
+
+    .login-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        background-color: white;
+        padding: 7%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        /* horizontal align */
+        width: 40vw;
+        margin-left: 30vw;
+        /* vertical align */
+        height: 70vh;
+        margin-top: 15vh;
+        border-radius: 8px;
+    }
 
 
-    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    button:hover {
+        cursor: pointer;
+        opacity: 0.8;
+        transition: 0.3s;
+    }
+
+
+
+
+
+
+    </style>
 </head>
 <body>
-<h2>Login</h2>
-<%-- Display error message if present --%>
-<% String error = request.getParameter("error"); %>
-<% if (error != null && !error.isEmpty()) { %>
-<p style="color: red;"><%= error %></p>
-<% } %>^)
-<div class="container">
-    <div class="d-flex justify-content-center h-100">
-        <div class="card">
-            <div class="card-header">
-                <h3>Sign In</h3>
-                <div class="d-flex justify-content-end social_icon">
-                    <span><i class="fab fa-facebook-square"></i></span>
-                    <span><i class="fab fa-google-plus-square"></i></span>
-                    <span><i class="fab fa-twitter-square"></i></span>
-                </div>
-            </div>
-            <div class="card-body">
-                <form action="login" method="post" class="form">
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+<div class = "login-container">
+    <form action="login" method="post" class="form">
+    <div id= "main">
+        <img style="width: 300px;" src="https://i.ibb.co/h16QN6C/Construction-Xpert.png"
+             alt="">
 
-                            <input type="text" name="username" id="username" placeholder="">
-                        </div>
-                    </div>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            <input type="password" name="password" id="password" placeholder="">
-                        </div>
-                    </div>
-                    <div class="row align-items-center remember">
-                        <input type="checkbox">Remember Me
-                    </div>
-                    <button type="submit" value="Login" class="sign">Sign in</button>
-                </form>
-            </div>
+        <input type="text" name="username" id="username" placeholder = "Username"></input>
+        <input id = "password" type ="password" name="password" placeholder = "Password"></input>
 
-        </div>
+        <button type="submit" value="Login" class="sign">Sign in</button>
     </div>
+    </form>
 </div>
-</body>
-</html>
-
-
-

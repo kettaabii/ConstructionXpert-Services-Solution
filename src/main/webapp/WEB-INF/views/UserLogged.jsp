@@ -773,8 +773,10 @@
             <c:forEach var="projectData" items="${projectsData}">
                 <div class="eg"  data-done-tasks="${projectData.doneTasks}"
                      data-total-tasks="${projectData.totalTasks}">
-
+                        <div style="display:flex;justify-content: space-between;">
                     <h3>${projectData.project.projectName}</h3>
+                            <div class="material-icons-sharp"><a href="projectDetails?projectId=${projectData.project.id}">more_horiz</a></div>
+                        </div>
                     <p>${projectData.project.budget}</p>
                     <h2 class>${projectData.doneTasks}/${projectData.totalTasks}
                     </h2>

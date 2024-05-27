@@ -2,9 +2,11 @@ package Servlets;
 
 import DAO.TaskDao;
 import com.fasterxml.jackson.core.type.TypeReference;
+import implementation.EmployeeDaoImpl;
 import implementation.ProjectDaoImpl;
 import implementation.TaskDaoImpl;
 import implementation.ResourceDaoImpl;
+import modals.Employee;
 import modals.Project;
 import modals.Resource;
 
@@ -33,6 +35,7 @@ public class AddRessourceTask extends HttpServlet {
         int taskId = Integer.parseInt(request.getParameter("taskId"));
         Integer id = Integer.valueOf(request.getParameter("projectId"));
         ResourceDaoImpl resourceDao = new ResourceDaoImpl();
+        EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
         request.setAttribute("taskId", taskId);
         request.setAttribute("projectId", id);
         List<Resource> ressources=null;
@@ -45,6 +48,13 @@ public class AddRessourceTask extends HttpServlet {
         }
         request.setAttribute("ressourcelist", ressources);
         ressources.forEach(System.out::println);
+        List<Employee> employees=null;
+        try {
+            employees=employeeDao.getAllEmployees();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        request.setAttribute("employeelist", employees);
         response.setContentType("text/html");
         request.getRequestDispatcher("WEB-INF/views/Add-ressource-for-task.jsp").forward(request,response);
 
@@ -53,6 +63,8 @@ public class AddRessourceTask extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Retrieve selected resource IDs from request parameters
         String[] selectedResourceIds = request.getParameterValues("resources");
+        int employeeId = Integer.parseInt(request.getParameter("employee"));
+        System.out.println("this is employee id"+employeeId);
         ResourceDaoImpl resourceDao = new ResourceDaoImpl();
         int taskId = Integer.parseInt(request.getParameter("taskId"));
         Integer id = Integer.valueOf(request.getParameter("projectId"));
@@ -86,6 +98,8 @@ public class AddRessourceTask extends HttpServlet {
                         System.out.println("maybe heeereeee");
                         System.out.println("hna l id t task "+taskId );
                         taskDao.setTaskStatusEN_COURS(taskId);
+                        taskDao.updateEmployeeId(taskId,employeeId);
+
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }

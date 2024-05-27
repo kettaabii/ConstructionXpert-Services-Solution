@@ -27,25 +27,21 @@ public class ProjectDaoImpl implements ProjectDao {
             statement.setDate(5, project.getDateFin());
             statement.executeUpdate();
 
-            return getProjectByname(project, con, pr);
+           PreparedStatement statement1 = con.prepareStatement("select * from project where projectName = ?");
+            statement1.setString(1, project.getProjectName());
+            ResultSet resultSet = statement1.executeQuery();
+            while (resultSet.next()) {
+                pr.setId(resultSet.getInt("id"));
+                pr.setProjectName(resultSet.getString("projectName"));
+                pr.setDescription(resultSet.getString("description"));
+                pr.setBudget(resultSet.getDouble("budget"));
+                pr.setDateDebut(resultSet.getDate("dateDebut"));
+                pr.setDateFin(resultSet.getDate("dateFin"));
+            }
+            return pr;
 
         }
 
-    }
-
-    public Project getProjectByname(Project project, Connection con, Project pr) throws SQLException {
-        PreparedStatement statement1 = con.prepareStatement("select * from project where projectName = ?");
-        statement1.setString(1, project.getProjectName());
-        ResultSet resultSet = statement1.executeQuery();
-        while (resultSet.next()) {
-            pr.setId(resultSet.getInt("id"));
-            pr.setProjectName(resultSet.getString("projectName"));
-            pr.setDescription(resultSet.getString("description"));
-            pr.setBudget(resultSet.getDouble("budget"));
-            pr.setDateDebut(resultSet.getDate("dateDebut"));
-            pr.setDateFin(resultSet.getDate("dateFin"));
-        }
-        return pr;
     }
 
     @Override
@@ -80,7 +76,8 @@ public class ProjectDaoImpl implements ProjectDao {
     public Project getProject(int id) throws SQLException {
         Project project = null;
         String sql = "SELECT * FROM project WHERE id=?";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        Connection con = Connectiondb.getConnection();
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {

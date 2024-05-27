@@ -34,4 +34,6 @@ public interface TaskDao {
     void associateTaskWithProject(int taskId, int projectId) throws SQLException;
 
     void addResourcesToTask(int taskId, List<Resource> resourcesToAdd) throws SQLException;
+
+    void updateEmployeeId(int taskId, int employeeId) throws SQLException;
 }

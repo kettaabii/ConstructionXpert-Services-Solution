@@ -26,15 +26,15 @@ public class loginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
+        UserDao userDAO = new UserDaoImpl();
+        User user = null;
+        try {
+            user = userDAO.getUserByUsernameAndPassword(username,password);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
 
-
-
-
-        try (Connection connection = Connectiondb.getConnection()) {
-            UserDao userDAO = new UserDaoImpl();
-            User user = userDAO.getUserByUsernameAndPassword(username,password);
-
-            if (user != null) {
+        if (user != null) {
                 HttpSession session = request.getSession();
 
                     // Set session attribute to mark user as logged in
@@ -43,15 +43,13 @@ public class loginServlet extends HttpServlet {
 
                     System.out.println(user.getUserName() +"::::::::::::::::::");
                     // Redirect to client dashboard
-                    response.sendRedirect(request.getContextPath()+"/AddProject");
+                    response.sendRedirect(request.getContextPath()+"/Dashboard");
                 } else {
                     // Invalid privilege
                     response.sendRedirect("login.jsp?error=invalid username or password");
                 }
 
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
-    }
+
 }

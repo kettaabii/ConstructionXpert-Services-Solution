@@ -1,14 +1,27 @@
 package DTO;
 
+import modals.Employee;
 import modals.Project;
+import modals.Resource;
+import modals.Task;
+
+import java.util.List;
 
 public class ProjectData {
     private Project project;
+    private List<Task> tasks;
     private int doneTasks;
     private int totalTasks;
 
     public ProjectData(Project project, int doneTasks, int totalTasks) {
         this.project = project;
+        this.doneTasks = doneTasks;
+        this.totalTasks = totalTasks;
+    }
+
+    public ProjectData(Project project,  List<Task> tasks, int doneTasks, int totalTasks) {
+        this.project = project;
+        this.tasks = tasks;
         this.doneTasks = doneTasks;
         this.totalTasks = totalTasks;
     }
@@ -37,5 +50,11 @@ public class ProjectData {
         this.totalTasks = totalTasks;
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
 
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 }

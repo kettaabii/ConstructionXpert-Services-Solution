@@ -222,5 +222,16 @@ public class TaskDaoImpl implements TaskDao {
         statement.close();
 
     }
+    @Override
+    public void updateEmployeeId(int taskId,int  employeeId) throws SQLException{
+        String sql = "UPDATE task SET assignedEmployeeId = ? WHERE idTask = ?";
+        Connection con = Connectiondb.getConnection();
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setInt(1,employeeId);
+            statement.setInt(2, taskId);
+            statement.executeUpdate();
+            statement.close();
+        }
+    }
 }
 
